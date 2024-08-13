@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/39a0374499.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
     <title>AhorrADAS</title>
 </head>
+
 <body>
-    
+    <!-- NAV BAR -->
+    <header>
+        <nav class="bg-teal-400 p-7 gap-6 text-white sm:flex sm:items-center sm:justify-between">
+            <section class="flex justify-between">
+                <button class="flex text-4xl hover:bg-teal-700 rounded font-bold">
+                    <i class="fa-solid fa-wallet p-1"></i>
+                    AhorrADAs
+                </button>
+                <span class="sm:hidden"><i class="fa-solid fa-bars justify-end"></i></span>
+            </section>
+            <div class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row">
+                <a href="#" class="hover:bg-teal-700 rounded 2xl:w-full"><i class="fa-solid fa-arrow-trend-up p-1"></i>Balance</a>
+                <a href="#" class="hover:bg-teal-700 rounded 2xl:w-full"><i class="fa-solid fa-tag p-1"></i>Categorías</a>
+                <a href="#" class="hover:bg-teal-700 rounded 2xl:w-full"><i class="fas fa-chart-pie p-1"></i> Reportes</a>
+            </div>
+        </nav>
+    </header>
+
 </body>
 </html>
