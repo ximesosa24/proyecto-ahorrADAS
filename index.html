@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/39a0374499.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/39a0374499.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="styles.css" />
     <title>AhorrADAS</title>
   </head>
@@ -24,8 +27,8 @@
             ><i class="fa-solid fa-bars justify-end"></i
           ></span>
           <span class="sm:hidden">
-          <i class="fa-solid fa-close justify-end"></i>
-        </span>
+            <i class="fa-solid fa-close justify-end"></i>
+          </span>
         </section>
         <div
           class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row"
@@ -42,26 +45,29 @@
         </div>
       </nav>
     </header>
-    <main>
-      <div>
+    <main class="container mx-auto px-4">
+     <div>
+      <div class="space-y-4 mx-8 mt-16">
         <!-- CARD BALANCE -->
-        <div class="flex-col mx-8 mt-16 rounded-lg bg-white w-1/4 shadow-lg p-4">
-            <h3 class="p-2 mb-4 text-3xl font-bold">Balance</h3>
-            <div class="flex justify-between p-2">
-                <p>Ganancias</p>
-                <div class="text-green-500">+$0</div>
-            </div>
-            <div class="flex justify-between p-2">
-                <p>Gastos</p>
-                <div class="text-red-500">-$0</div>
-            </div>
-            <div class="flex justify-between p-2 mt-2">
-                <p class="text-xl font-semibold">Total</p>
-                <div class="text-xl">$0</div>
-            </div>
+        <div
+          class="flex-col mx-8 mt-16 rounded-lg bg-white w-1/4 shadow-lg p-8"
+        >
+          <h3 class="p-2 mb-4 text-3xl font-bold">Balance</h3>
+          <div class="flex justify-between p-2">
+            <p>Ganancias</p>
+            <div class="text-green-500">+$0</div>
+          </div>
+          <div class="flex justify-between p-2">
+            <p>Gastos</p>
+            <div class="text-red-500">-$0</div>
+          </div>
+          <div class="flex justify-between p-2 mt-2">
+            <p class="text-xl font-semibold">Total</p>
+            <div class="text-xl">$0</div>
+          </div>
         </div>
         <!--CARD DE FILTROS -->
-        <div class="max-w-sm mx-auto bg-white rounded-lg shadow-lg p-6">
+        <div class="max-w-sm w-1/4 mx-8 bg-white rounded-lg shadow-lg p-8">
           <h2 class="text-xl font-semibold mb-4">Filtros</h2>
           <form>
             <div class="mb-4">
@@ -127,6 +133,31 @@
           </form>
         </div>
       </div>
+      <!--nuevo div, CARD DE OPERACIONES -->
+      <div>
+        <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-8">
+          <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-semibold">Operaciones</h2>
+            <button
+              class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none"
+            >
+              + Nueva operación
+            </button>
+          </div>
+          <div class="flex flex-col items-center justify-center h-64">
+            <img
+              src="./assets/img/saving.png"
+              alt="imagen saving"
+              class="mb-4 w-1/2"
+            />
+            <p class="text-gray-500">Sin resultados</p>
+            <p class="text-sm text-gray-400">
+              Cambia los filtros o agrega operaciones
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     </main>
   </body>
 </html>
