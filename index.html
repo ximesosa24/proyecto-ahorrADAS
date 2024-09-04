@@ -15,38 +15,32 @@
   <body>
     <!-- NAV BAR -->
     <header>
-      <nav
-        class="bg-teal-400 p-7 gap-6 text-white sm:flex sm:items-center sm:justify-between"
-      >
+      <nav class="bg-purple-500 p-7 gap-6 text-white sm:flex sm:items-center sm:justify-between">
         <section class="flex justify-between">
-          <button class="flex text-4xl hover:bg-teal-700 rounded font-bold">
+          <button class="flex text-4xl hover:bg-pink-600 rounded font-bold">
             <i class="fa-solid fa-wallet p-1"></i>
             AhorrADAs
           </button>
-          <span class="sm:hidden"
-            ><i class="fa-solid fa-bars justify-end"></i
-          ></span>
+          <span class="sm:hidden">
+            <i class="fa-solid fa-bars justify-end"></i>
+          </span>
           <span class="sm:hidden">
             <i class="fa-solid fa-close justify-end"></i>
           </span>
         </section>
-        <div
-          class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row"
-        >
-          <a href="#" class="hover:bg-teal-700 rounded 2xl:w-full"
-            ><i class="fa-solid fa-arrow-trend-up p-1"></i>Balance</a
-          >
-          <a href="#" class="hover:bg-teal-700 rounded 2xl:w-full"
-            ><i class="fa-solid fa-tag p-1"></i>Categorías</a
-          >
-          <a href="#" class="hover:bg-teal-700 rounded 2xl:w-full"
-            ><i class="fas fa-chart-pie p-1"></i> Reportes</a
-          >
+        <div class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row">
+          <a href="#Balance" id="btn-balance" class="hover:bg-pink-600 rounded 2xl:w-full">
+            <i class="fa-solid fa-arrow-trend-up p-1"></i>Balance</a>
+          <a href="#Categorías" id="btn-categorías" class="hover:bg-pink-600 rounded 2xl:w-full">
+            <i class="fa-solid fa-tag p-1"></i>Categorías</a>
+          <a href="#Reportes" id="btn-reportes" class="hover:bg-pink-600 rounded 2xl:w-full">
+            <i class="fas fa-chart-pie p-1"></i> Reportes</a>
         </div>
       </nav>
     </header>
+
     <main class="container mx-auto px-4">
-     <div>
+    <div>
       <div class="space-y-4 mx-8 mt-16">
         <!-- CARD BALANCE -->
         <div
@@ -157,6 +151,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
     </main>
   </body>
