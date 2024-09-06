@@ -157,71 +157,145 @@
     <!-- AGREGAR REPORTES -->
     <div class="flex flex-col  vista mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg p-4" id="seccion-reportes">
         <h3 class="text-4xl font-bold mb-4">Reportes</h3>
-        <!-- reportes sin operaciones -->
-        <div class="flex flex-col items-center">
+        <!-- Comienzo reportes sin operaciones -->
+        <section class="flex flex-col items-center">
             <img src="./assets/img/reportes.svg" alt="Imagen que muestra gráficos y reportes" class="object-cover w-96 p-5">
             <div class="flex flex-col items-center mt-4">
                 <p class="text-2xl mb-2">Operaciones insuficientes</p>
                 <p class="p-1">Prueba agregando más operaciones</p>
             </div>
-        </div>
-        <!-- reportes con operaciones -->
-        <div class="" id="resumen">
+        </section>
+        <!-- Comienzo reportes con operaciones -->
+        <section class="m-4" id="reporteResumen">
         <!-- resumen -->
-        <div class="mb-4" id="conOperaciones"> 
+        <div class="mb-4" id="resumenOperaciones"> 
           <p class="text-2xl font-bold mb-4">Resumen</p>
           <!-- Mayor ganancia -->
           <div class="columns">
             <h4 class="font-bold text-gray-700" >Categoría con mayor ganancia</h4>
             <div class="">
-              <span id="mayorGanancia"></span>
+              <span id="resumenMayorGanancia"></span>
             </div>
             <div>
-              <span id="montoMayorGanancia"></span>
+              <span id="resumenMontoMayor"></span>
             </div>
           </div>
           <!-- Mayor gasto -->
           <div class="columns">
             <h4 class="font-bold text-gray-700" >Categoría con mayor gasto</h4>
             <div class="">
-              <span id="categoriaMayorGasto"></span>
+              <span id="resumenMayorGasto"></span>
             </div>
             <div>
-              <span id="montoMayorGasto"></span>
+              <span id="resumenMontoMayor"></span>
             </div>
           </div>
           <!-- Mayor balance -->
           <div class="columns">
             <h4 class="font-bold text-gray-700" >Categoría con mayor balance</h4>
             <div class="">
-              <span id="categoriaMayorBalance"></span>
+              <span id="resumenMayorBalance"></span>
             </div>
             <div>
-              <span id="montoMayorBalance"></span>
+              <span id="resumenMontoMayorBalance"></span>
             </div>
           </div>
           <!-- Mes mayor ganancia -->
           <div class="columns">
             <h4 class="font-bold text-gray-700" >Mes con mayor ganancia</h4>
             <div class="">
-              <span id="categoriaMayorGanancia"></span>
+              <span id="resumenMayorGanancia"></span>
             </div>
             <div>
-              <span id="montoMayorGanancia"></span>
+              <span id="resumenMontoMayorGanancia"></span>
             </div>
           </div>
           <!-- Mes mayor gasto -->
           <div class="columns">
             <h4 class="font-bold text-gray-700" >Mes con mayor gasto</h4>
             <div class="">
-              <span id="mesMayorGasto"></span>
+              <span id="resumenMayorGastoMes"></span>
             </div>
             <div>
-              <span id="mesMontoMayor"></span>
+              <span id="resumenMontoGastoMes"></span>
             </div>
           </div>
         </div>
+        </section>
+    <!-- comienzo card Categorías -->
+        <section class="m-4" id="reporteCategorías">
+          <!-- Total categorías -->
+          <div class="mb-4" id="conCategorías"> 
+            <p class="text-2xl font-bold mb-4">Categorías</p>
+          </div>
+          <div class="flex flex-row gap-9">
+          <!-- total categorias -->
+            <div class="flex flex-col">
+              <h4 class="font-bold text-gray-700" >Categorías </h4>
+              <div>
+                <span id="totalCategorías"></span>
+              </div>
+            </div>
+          <!-- total ganancia -->
+            <div class="flex flex-col">
+              <h4 class="font-bold text-gray-700" >Ganancias</h4>
+              <div>
+                <span id="totalGanancias"></span>
+              </div>
+            </div>
+          <!-- total gasto -->
+            <div class="flex flex-col">
+              <h4 class="font-bold text-gray-700" >Gastos</h4>
+              <div>
+                <span id="totalGasto"></span>
+              </div>
+            </div>
+          <!-- total balance -->
+            <div class="flex flex-col">
+              <h4 class="font-bold text-gray-700" >Balance</h4>
+              <div class="">
+                <span id="totalBalance"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+    <!-- Comienzo card Mes-->
+        <section class="m-4" id="reporteMes">
+        <!-- Totales por mes -->
+          <div class="mt-4" id="conMes"> 
+            <p class="text-2xl font-bold mb-4">Totales por mes</p>
+          </div>
+          <div class="flex flex-row gap-9">
+          <!-- Mes categorias -->
+          <div class="flex flex-col">
+            <h4 class="font-bold text-gray-700" >Mes </h4>
+            <div>
+              <span id="reporteMes"></span>
+            </div>
+          </div>
+          <!-- Mes ganancia -->
+          <div class="flex flex-col">
+            <h4 class="font-bold text-gray-700" >Ganancias</h4>
+              <div>
+                <span id="totalMesGanancias"></span>
+              </div>
+          </div>
+          <!-- Mes gasto -->
+          <div class="flex flex-col">
+            <h4 class="font-bold text-gray-700" >Gastos</h4>
+            <div>
+              <span id="totalMesGasto"></span>
+            </div>
+          </div>
+          <!-- Mes balance -->
+          <div class="flex flex-col">
+            <h4 class="font-bold text-gray-700" >Balance</h4>
+            <div>
+              <span id="totalMesBalance"></span>
+            </div>
+          </div>
         </div>
+      </section>
     </div>
     </main>
   </body>
