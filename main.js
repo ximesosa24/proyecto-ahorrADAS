@@ -8,6 +8,7 @@ const resumenReportes = document.getElementById ('reporteResumen');
 const reporteCategorías = document.getElementById ('reporteCategorías');
 const reporteMes = document.getElementById ('reporteMes');
 
+
 // Mostrar solo reportes //
 toggleBtn.addEventListener('click', function () {
   card.classList.remove('hidden');
@@ -23,3 +24,19 @@ toggleBtn.addEventListener('click', function () {
     reporteMes.classList.add('hidden');
 });
 
+
+// BTN NUEVA OPERACION - ENRUTADO - HIDDEN //
+const operacion = document.getElementById('seccion-operacion');
+const reportes = document.getElementById('seccion-reportes');
+const nuevaOperacionBtn = document.getElementById('btn-nueva-operacion'); 
+const seccionOperacion = document.getElementById('seccion-operacion'); 
+const seccionOperaciones = document.getElementById('seccion-operaciones'); 
+
+nuevaOperacionBtn.addEventListener('click', function () {
+    operacion.classList.remove('hidden'); 
+    balance.classList.add('hidden');       
+    reportes.classList.add('hidden');     
+    filtros.classList.add('hidden');       
+    seccionOperacion.classList.remove('hidden'); 
+    seccionOperaciones.classList.add('hidden');  
+  });
