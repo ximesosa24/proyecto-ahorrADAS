@@ -43,8 +43,8 @@
     <div>
       <div class="space-y-4 mx-8 mt-16">
         <!-- CARD BALANCE -->
-        <div
-          class="flex-col mx-8 mt-16 rounded-lg bg-white w-1/4 shadow-lg p-8"
+        <div id="seccion-balance"
+          class="flex-col is-hidden mx-8 mt-16 rounded-lg bg-white w-1/4 shadow-lg p-8"
         >
           <h3 class="p-2 mb-4 text-3xl font-bold">Balance</h3>
           <div class="flex justify-between p-2">
@@ -61,7 +61,7 @@
           </div>
         </div>
         <!--CARD DE FILTROS -->
-        <div class="max-w-sm w-1/4 mx-8 bg-white rounded-lg shadow-lg p-8">
+        <div class="max-w-sm w-1/4 mx-8 bg-white rounded-lg shadow-lg p-8" id="seccion-filtros">
           <h2 class="text-xl font-semibold mb-4">Filtros</h2>
           <form>
             <div class="mb-4">
@@ -129,7 +129,7 @@
       </div>
       <!--nuevo div, CARD DE OPERACIONES -->
       <div>
-        <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-8">
+        <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-8" id="seccion-operaciones">
           <div class="flex justify-between items-center mb-8">
             <h2 class="text-xl font-semibold">Operaciones</h2>
             <button
@@ -155,7 +155,7 @@
     </div>
 
     <!-- AGREGAR REPORTES -->
-    <div class="flex flex-col  vista mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg p-4" id="seccion-reportes">
+    <div class="flex flex-col  vista hidden mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg p-4" id="seccion-reportes">
         <h3 class="text-4xl font-bold mb-4">Reportes</h3>
         <!-- Comienzo reportes sin operaciones -->
         <section class="flex flex-col items-center">
@@ -298,5 +298,7 @@
       </section>
     </div>
     </main>
+    <!-- JS -->
+    <script src="main.js"></script>
   </body>
 </html>
