@@ -128,31 +128,73 @@
         </div>
       </div>
       <!--nuevo div, CARD DE OPERACIONES -->
-      <div>
-        <div class="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-8" id="seccion-operaciones">
-          <div class="flex justify-between items-center mb-8">
-            <h2 class="text-xl font-semibold">Operaciones</h2>
-            <button
-              class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none"
-            >
-              + Nueva operación
-            </button>
-          </div>
-          <div class="flex flex-col items-center justify-center h-64">
-            <img
-              src="./assets/img/saving.png"
-              alt="imagen saving"
-              class="mb-4 w-1/2"
-            />
-            <p class="text-gray-500">Sin resultados</p>
-            <p class="text-sm text-gray-400">
-              Cambia los filtros o agrega operaciones
-            </p>
-          </div>
+    <div>
+      <!-- Sección de Operaciones -->
+      <div class="max-w-lg mx-auto justify-center bg-white rounded-lg shadow-lg p-8" id="seccion-operaciones">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-xl font-semibold">Operaciones</h2>
+          <button 
+            id="btn-nueva-operacion"
+            class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none"
+          >
+            + Nueva operación
+          </button>
+        </div>
+        <div class="flex flex-col items-center justify-center h-64">
+          <img
+            src="./assets/img/saving.png"
+            alt="imagen saving"
+            class="mb-4 w-1/2"
+          />
+          <p class="text-gray-500">Sin resultados</p>
+          <p class="text-sm text-gray-400">
+            Cambia los filtros o agrega operaciones
+          </p>
         </div>
       </div>
-    </div>
-    </div>
+    <!-- Sección Nueva Operación -->
+      <div class="flex items-center justify-center">
+        <!-- Sección Nueva Operación -->
+        <div id="seccion-operacion" class="w-full max-w-4xl p-10 bg-white rounded-lg shadow-lg hidden"> 
+          <h2 class="text-xl font-semibold mb-4">Nueva Operación</h2>
+          <form>
+            <div class="mb-6">
+              <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+              <input type="text" id="descripcion" name="descripcion" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="mb-6">
+              <label for="monto" class="block text-sm font-medium text-gray-700">Monto</label>
+              <input type="number" id="monto" name="monto" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <div class="mb-6">
+              <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
+              <select id="tipo" name="tipo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <option value="" disabled selected>Seleccione un tipo</option>
+                <option value="ingreso">Gasto</option>
+                <option value="gasto">Ganancia</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label for="tipo" class="block text-sm font-medium text-gray-700">Categoría</label>
+              <select id="tipo" name="tipo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                <option value="" disabled selected>Seleccione un tipo</option>
+                <option value="ingreso">Comida</option>
+                <option value="gasto">Servicios</option>
+                <option value="ingreso">Salidas</option>
+                <option value="gasto">Educación</option>
+                <option value="ingreso">Transporte</option>
+                <option value="gasto">Trabajo</option>
+              </select>
+            </div>
+            <div class="mb-8">
+              <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
+              <input type="date" id="fecha" name="fecha" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+            </div>
+            <button type="submit" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">Agregar Operación</button>
+            <button type="button" class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 focus:outline-none">Cancelar</button>
+          </form>
+        </div>
+      </div>
 
     <!-- AGREGAR REPORTES -->
     <div class="flex flex-col  vista hidden mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg p-4" id="seccion-reportes">
