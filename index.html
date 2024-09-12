@@ -1,365 +1,397 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script
-      src="https://kit.fontawesome.com/39a0374499.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="styles.css" />
-    <title>AhorrADAS</title>
-  </head>
 
-  <body>
-    <!-- NAV BAR -->
-    <header>
-      <nav class="bg-purple-500 p-7 gap-6 text-white sm:flex sm:items-center sm:justify-between">
-        <section class="flex justify-between">
-          <button class="flex text-4xl hover:bg-pink-600 rounded font-bold">
-            <i class="fa-solid fa-wallet p-1"></i>
-            AhorrADAs
-          </button>
-          <span class="sm:hidden">
-            <i class="fa-solid fa-bars justify-end"></i>
-          </span>
-          <span class="sm:hidden">
-            <i class="fa-solid fa-close justify-end"></i>
-          </span>
-        </section>
-        <div class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row">
-          <a href="#Balance" id="btn-balance" class="hover:bg-pink-600 rounded 2xl:w-full">
-            <i class="fa-solid fa-arrow-trend-up p-1"></i>Balance</a>
-          <a href="#Categorías" id="btn-categorías" class="hover:bg-pink-600 rounded 2xl:w-full">
-            <i class="fa-solid fa-tag p-1"></i>Categorías</a>
-          <a href="#Reportes" id="btn-reportes" class="hover:bg-pink-600 rounded 2xl:w-full">
-            <i class="fas fa-chart-pie p-1"></i> Reportes</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/39a0374499.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <title>AhorrADAS</title>
+</head>
+
+<body>
+  <!-- NAV BAR -->
+  <header>
+    <nav class="bg-purple-500 p-7 gap-6 text-white sm:flex sm:items-center sm:justify-between">
+      <section class="flex justify-between">
+        <button class="flex text-4xl hover:bg-pink-600 rounded font-bold">
+          <i class="fa-solid fa-wallet p-1"></i>
+          AhorrADAs
+        </button>
+        <span class="sm:hidden">
+          <i class="fa-solid fa-bars justify-end"></i>
+        </span>
+        <span class="sm:hidden">
+          <i class="fa-solid fa-close justify-end"></i>
+        </span>
+      </section>
+      <div class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row">
+        <a href="#Balance" id="btn-balance" class="hover:bg-pink-600 rounded 2xl:w-full">
+          <i class="fa-solid fa-arrow-trend-up p-1"></i>Balance</a>
+        <a href="#Categorías" id="btn-categorías" class="hover:bg-pink-600 rounded 2xl:w-full">
+          <i class="fa-solid fa-tag p-1"></i>Categorías</a>
+        <a href="#Reportes" id="btn-reportes" class="hover:bg-pink-600 rounded 2xl:w-full">
+          <i class="fas fa-chart-pie p-1"></i> Reportes</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mx-auto px-4">
+    <div>
+      <div class="flex mx-8 mt-16 gap-4">
+        <!-- Contenedor de las tarjetas Balance y Filtros en columna -->
+        <div class="flex flex-col gap-4 flex-1 max-w-xs">
+          <!-- CARD BALANCE -->
+          <div id="seccion-balance" class="rounded-lg bg-white shadow-lg p-8">
+            <h3 class="p-2 mb-4 text-3xl font-bold">Balance</h3>
+            <div class="flex justify-between p-2">
+              <p>Ganancias</p>
+              <div id="ganancias" class="text-green-500">+$0</div>
+            </div>
+            <div class="flex justify-between p-2">
+              <p>Gastos</p>
+              <div id="gastos" class="text-red-500">-$0</div>
+            </div>
+            <div class="flex justify-between p-2 mt-2">
+              <p class="text-xl font-semibold">Total</p>
+              <div id="total" class="text-xl">$0</div>
+            </div>
+          </div>
+
+          <!-- CARD FILTROS -->
+          <div id="seccion-filtros" class="rounded-lg bg-white shadow-lg p-8">
+            <h2 class="text-xl font-semibold mb-4">Filtros</h2>
+            <form>
+              <div class="mb-4">
+                <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
+                <select id="tipo"
+                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                  <option>Todos</option>
+                  <option>Ganancias</option>
+                  <option>Gastos</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label for="categoria" class="block text-sm font-medium text-gray-700">Categoría</label>
+                <select id="categoria"
+                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                  <option>Todas</option>
+                  <option>Comida</option>
+                  <option>Servicios</option>
+                  <option>Salidas</option>
+                  <option>Comida</option>
+                  <option>Educacion</option>
+                  <option>Transporte</option>
+                  <option>Trabajo</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label for="desde" class="block text-sm font-medium text-gray-700">Desde</label>
+                <input type="date" id="desde"
+                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+              </div>
+              <div class="mb-4">
+                <label for="ordenar" class="block text-sm font-medium text-gray-700">Ordenar por</label>
+                <select id="ordenar"
+                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                  <option>Más reciente</option>
+                  <option>Menos reciente</option>
+                  <option>Mayor monto</option>
+                  <option>Menor monto</option>
+                  <option>A/Z</option>
+                  <option>Z/A</option>
+                </select>
+              </div>
+              <div class="text-right">
+                <button type="button" class="text-indigo-500 hover:text-indigo-700 focus:outline-none">
+                  Ocultar filtros
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </nav>
-    </header>
 
-    <main class="container mx-auto px-4">
+        <!-- CARD OPERACIONES -->
+        <div id="seccion-operaciones" class="flex-1 min-w-[300px] rounded-lg bg-white shadow-lg p-8">
+          <div class="flex justify-between items-center mb-8">
+            <h2 class="text-xl font-semibold">Operaciones</h2>
+            <button id="btn-nueva-operacion"
+              class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">
+              + Nueva operación
+            </button>
+          </div>
+          <div class="flex flex-col items-center justify-center h-64">
+            <img src="./assets/img/saving.png" alt="imagen saving" class="mb-4 w-1/2" />
+            <p class="text-gray-500">Sin resultados</p>
+            <p class="text-sm text-gray-400">Cambia los filtros o agrega operaciones</p>
+          </div>
+        </div>
+      </div>
+
+      <!--nuevo div, CARD DE OPERACIONES -->
       <div>
-        <div class="flex mx-8 mt-16 gap-4">
-          <!-- Contenedor de las tarjetas Balance y Filtros en columna -->
-          <div class="flex flex-col gap-4 flex-1 max-w-xs">
-            <!-- CARD BALANCE -->
-            <div id="seccion-balance" class="rounded-lg bg-white shadow-lg p-8">
-              <h3 class="p-2 mb-4 text-3xl font-bold">Balance</h3>
-              <div class="flex justify-between p-2">
-                <p>Ganancias</p>
-                <div id="ganancias" class="text-green-500">+$0</div>
+        <!-- Sección Nueva Operación -->
+        <div class="flex items-center justify-center">
+          <!-- Sección Nueva Operación -->
+          <div id="seccion-operacion" class="w-full max-w-4xl p-10 bg-white rounded-lg shadow-lg hidden">
+            <h2 class="text-xl font-semibold mb-4">Nueva Operación</h2>
+            <form>
+              <div class="mb-6">
+                <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+                <input type="text" id="descripcion" name="descripcion"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required>
               </div>
-              <div class="flex justify-between p-2">
-                <p>Gastos</p>
-                <div id="gastos" class="text-red-500">-$0</div>
+              <div class="mb-6">
+                <label for="monto" class="block text-sm font-medium text-gray-700">Monto</label>
+                <input type="number" id="monto" name="monto"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required>
               </div>
-              <div class="flex justify-between p-2 mt-2">
-                <p class="text-xl font-semibold">Total</p>
-                <div id="total" class="text-xl">$0</div>
+              <div class="mb-6">
+                <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
+                <select id="tipo" name="tipo"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required>
+                  <option value="" disabled selected>Seleccione un tipo</option>
+                  <option value="ingreso">Gasto</option>
+                  <option value="gasto">Ganancia</option>
+                </select>
               </div>
-            </div>
-        
-            <!-- CARD FILTROS -->
-            <div id="seccion-filtros" class="rounded-lg bg-white shadow-lg p-8">
-                <h2 class="text-xl font-semibold mb-4">Filtros</h2>
-                <form>
-                  <div class="mb-4">
-                    <label for="tipo" class="block text-sm font-medium text-gray-700"
-                      >Tipo</label
-                    >
-                    <select
-                      id="tipo"
-                      class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    >
-                      <option>Todos</option>
-                      <option>Ganancias</option>
-                      <option>Gastos</option>
-                    </select>
-                  </div>
-                  <div class="mb-4">
-                    <label
-                      for="categoria"
-                      class="block text-sm font-medium text-gray-700"
-                      >Categoría</label
-                    >
-                    <select
-                      id="categoria"
-                      class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    >
-                      <option>Todas</option>
-                      <option>Comida</option>
-                      <option>Servicios</option>
-                      <option>Salidas</option>
-                      <option>Comida</option>
-                      <option>Educacion</option>
-                      <option>Transporte</option>
-                      <option>Trabajo</option>
-                    </select>
-                  </div>
-                  <div class="mb-4">
-                    <label for="desde" class="block text-sm font-medium text-gray-700"
-                      >Desde</label
-                    >
-                    <input
-                      type="date"
-                      id="desde"
-                      class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    />
-                  </div>
-                  <div class="mb-4">
-                    <label
-                      for="ordenar"
-                      class="block text-sm font-medium text-gray-700"
-                      >Ordenar por</label
-                    >
-                    <select
-                      id="ordenar"
-                      class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    >
-                    <option>Más reciente</option>
-                    <option>Menos reciente</option>
-                    <option>Mayor monto</option>
-                    <option>Menor monto</option>
-                    <option>A/Z</option>
-                    <option>Z/A</option>
-                    </select>
-                  </div>
-                  <div class="text-right">
-                    <button
-                      type="button"
-                      class="text-indigo-500 hover:text-indigo-700 focus:outline-none"
-                    >
-                      Ocultar filtros
-                    </button>
-                  </div>
-                </form>
+              <div class="mb-6">
+                <label for="tipo" class="block text-sm font-medium text-gray-700">Categoría</label>
+                <select id="tipo" name="tipo"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required>
+                  <option value="" disabled selected>Seleccione un tipo</option>
+                  <option value="ingreso">Comida</option>
+                  <option value="gasto">Servicios</option>
+                  <option value="ingreso">Salidas</option>
+                  <option value="gasto">Educación</option>
+                  <option value="ingreso">Transporte</option>
+                  <option value="gasto">Trabajo</option>
+                </select>
               </div>
-          </div>
-        
-          <!-- CARD OPERACIONES -->
-          <div id="seccion-operaciones" class="flex-1 min-w-[300px] rounded-lg bg-white shadow-lg p-8">
-            <div class="flex justify-between items-center mb-8">
-              <h2 class="text-xl font-semibold">Operaciones</h2>
-              <button id="btn-nueva-operacion" class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">
-                + Nueva operación
-              </button>
-            </div>
-            <div class="flex flex-col items-center justify-center h-64">
-              <img src="./assets/img/saving.png" alt="imagen saving" class="mb-4 w-1/2" />
-              <p class="text-gray-500">Sin resultados</p>
-              <p class="text-sm text-gray-400">Cambia los filtros o agrega operaciones</p>
-            </div>
+              <div class="mb-8">
+                <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
+                <input type="date" id="fecha" name="fecha"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required>
+              </div>
+              <button type="submit"
+                class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">Agregar
+                Operación</button>
+              <button type="button"
+                class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 focus:outline-none">Cancelar</button>
+            </form>
           </div>
         </div>
-        
-        <!--nuevo div, CARD DE OPERACIONES -->
-        <div>
-          <!-- Sección Nueva Operación -->
-          <div class="flex items-center justify-center">
-            <!-- Sección Nueva Operación -->
-            <div id="seccion-operacion" class="w-full max-w-4xl p-10 bg-white rounded-lg shadow-lg hidden">
-              <h2 class="text-xl font-semibold mb-4">Nueva Operación</h2>
-              <form>
-                <div class="mb-6">
-                  <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                  <input type="text" id="descripcion" name="descripcion"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required>
-                </div>
-                <div class="mb-6">
-                  <label for="monto" class="block text-sm font-medium text-gray-700">Monto</label>
-                  <input type="number" id="monto" name="monto"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required>
-                </div>
-                <div class="mb-6">
-                  <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
-                  <select id="tipo" name="tipo"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required>
-                    <option value="" disabled selected>Seleccione un tipo</option>
-                    <option value="ingreso">Gasto</option>
-                    <option value="gasto">Ganancia</option>
-                  </select>
-                </div>
-                <div class="mb-6">
-                  <label for="tipo" class="block text-sm font-medium text-gray-700">Categoría</label>
-                  <select id="tipo" name="tipo"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required>
-                    <option value="" disabled selected>Seleccione un tipo</option>
-                    <option value="ingreso">Comida</option>
-                    <option value="gasto">Servicios</option>
-                    <option value="ingreso">Salidas</option>
-                    <option value="gasto">Educación</option>
-                    <option value="ingreso">Transporte</option>
-                    <option value="gasto">Trabajo</option>
-                  </select>
-                </div>
-                <div class="mb-8">
-                  <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
-                  <input type="date" id="fecha" name="fecha"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required>
-                </div>
-                <button type="submit"
-                  class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">Agregar
-                  Operación</button>
-                <button type="button"
-                  class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 focus:outline-none">Cancelar</button>
-              </form>
+
+        <!-- AGREGAR REPORTES -->
+        <div class="flex flex-col  vista hidden mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg p-4"
+          id="seccion-reportes">
+          <h3 class="text-4xl font-bold mb-4">Reportes</h3>
+          <!-- Comienzo reportes sin operaciones -->
+          <section class="flex flex-col items-center">
+            <img src="./assets/img/reportes.svg" alt="Imagen que muestra gráficos y reportes"
+              class="object-cover w-96 p-5">
+            <div class="flex flex-col items-center mt-4">
+              <p class="text-2xl mb-2">Operaciones insuficientes</p>
+              <p class="p-1">Prueba agregando más operaciones</p>
             </div>
+          </section>
+          <!-- Comienzo reportes con operaciones -->
+          <section class="m-4" id="reporteResumen">
+            <!-- resumen -->
+            <div class="mb-4" id="resumenOperaciones">
+              <p class="text-2xl font-bold mb-4">Resumen</p>
+              <!-- Mayor ganancia -->
+              <div class="columns">
+                <h4 class="font-bold text-gray-700">Categoría con mayor ganancia</h4>
+                <div class="">
+                  <span id="resumenMayorGanancia"></span>
+                </div>
+                <div>
+                  <span id="resumenMontoMayor"></span>
+                </div>
+              </div>
+              <!-- Mayor gasto -->
+              <div class="columns">
+                <h4 class="font-bold text-gray-700">Categoría con mayor gasto</h4>
+                <div class="">
+                  <span id="resumenMayorGasto"></span>
+                </div>
+                <div>
+                  <span id="resumenMontoMayor"></span>
+                </div>
+              </div>
+              <!-- Mayor balance -->
+              <div class="columns">
+                <h4 class="font-bold text-gray-700">Categoría con mayor balance</h4>
+                <div class="">
+                  <span id="resumenMayorBalance"></span>
+                </div>
+                <div>
+                  <span id="resumenMontoMayorBalance"></span>
+                </div>
+              </div>
+              <!-- Mes mayor ganancia -->
+              <div class="columns">
+                <h4 class="font-bold text-gray-700">Mes con mayor ganancia</h4>
+                <div class="">
+                  <span id="resumenMayorGanancia"></span>
+                </div>
+                <div>
+                  <span id="resumenMontoMayorGanancia"></span>
+                </div>
+              </div>
+              <!-- Mes mayor gasto -->
+              <div class="columns">
+                <h4 class="font-bold text-gray-700">Mes con mayor gasto</h4>
+                <div class="">
+                  <span id="resumenMayorGastoMes"></span>
+                </div>
+                <div>
+                  <span id="resumenMontoGastoMes"></span>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- comienzo card Categorías -->
+          <section class="m-4" id="reporteCategorías">
+            <!-- Total categorías -->
+            <div class="mb-4" id="conCategorías">
+              <p class="text-2xl font-bold mb-4">Categorías</p>
+            </div>
+            <div class="flex flex-row gap-9">
+              <!-- total categorias -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Categorías </h4>
+                <div>
+                  <span id="totalCategorías"></span>
+                </div>
+              </div>
+              <!-- total ganancia -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Ganancias</h4>
+                <div>
+                  <span id="totalGanancias"></span>
+                </div>
+              </div>
+              <!-- total gasto -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Gastos</h4>
+                <div>
+                  <span id="totalGasto"></span>
+                </div>
+              </div>
+              <!-- total balance -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Balance</h4>
+                <div class="">
+                  <span id="totalBalance"></span>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Comienzo card Mes-->
+          <section class="m-4" id="reporteMes">
+            <!-- Totales por mes -->
+            <div class="mt-4" id="conMes">
+              <p class="text-2xl font-bold mb-4">Totales por mes</p>
+            </div>
+            <div class="flex flex-row gap-9">
+              <!-- Mes categorias -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Mes </h4>
+                <div>
+                  <span id="reporteMes"></span>
+                </div>
+              </div>
+              <!-- Mes ganancia -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Ganancias</h4>
+                <div>
+                  <span id="totalMesGanancias"></span>
+                </div>
+              </div>
+              <!-- Mes gasto -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Gastos</h4>
+                <div>
+                  <span id="totalMesGasto"></span>
+                </div>
+              </div>
+              <!-- Mes balance -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Balance</h4>
+                <div>
+                  <span id="totalMesBalance"></span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- CARD CATEGORIAS -->
+        <div id="seccion-categorias" class="flex justify-center items-center hidden">
+          <div class="bg-white shadow-md rounded-lg p-8 w-1/2">
+            <h2 class="text-3xl font-bold mb-6">Categorías</h2>
+            <div class="flex items-center mb-4">
+              <input type="text" placeholder="Nombre" class="w-full border rounded-lg px-4 py-2 mr-4">
+              <button
+                class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">Agregar</button>
+            </div>
+            <ul>
+              <li class="flex justify-between items-center mb-2">
+                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Comida</span>
+                <div>
+                  <a href="#" class="text-blue-500 mr-4">Editar</a>
+                  <a href="#" class="text-red-500">Eliminar</a>
+                </div>
+              </li>
+              <li class="flex justify-between items-center mb-2">
+                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Servicios</span>
+                <div>
+                  <a href="#" class="text-blue-500 mr-4">Editar</a>
+                  <a href="#" class="text-red-500">Eliminar</a>
+                </div>
+              </li>
+              <li class="flex justify-between items-center mb-2">
+                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Salidas</span>
+                <div>
+                  <a href="#" class="text-blue-500 mr-4">Editar</a>
+                  <a href="#" class="text-red-500">Eliminar</a>
+                </div>
+              </li>
+              <li class="flex justify-between items-center mb-2">
+                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Educación</span>
+                <div>
+                  <a href="#" class="text-blue-500 mr-4">Editar</a>
+                  <a href="#" class="text-red-500">Eliminar</a>
+                </div>
+              </li>
+              <li class="flex justify-between items-center mb-2">
+                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Transporte</span>
+                <div>
+                  <a href="#" class="text-blue-500 mr-4">Editar</a>
+                  <a href="#" class="text-red-500">Eliminar</a>
+                </div>
+              </li>
+              <li class="flex justify-between items-center mb-2">
+                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Trabajo</span>
+                <div>
+                  <a href="#" class="text-blue-500 mr-4">Editar</a>
+                  <a href="#" class="text-red-500">Eliminar</a>
+                </div>
+              </li>
+            </ul>
           </div>
-  
-          <!-- AGREGAR REPORTES -->
-          <div class="flex flex-col  vista hidden mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg p-4"
-            id="seccion-reportes">
-            <h3 class="text-4xl font-bold mb-4">Reportes</h3>
-            <!-- Comienzo reportes sin operaciones -->
-            <section class="flex flex-col items-center">
-              <img src="./assets/img/reportes.svg" alt="Imagen que muestra gráficos y reportes"
-                class="object-cover w-96 p-5">
-              <div class="flex flex-col items-center mt-4">
-                <p class="text-2xl mb-2">Operaciones insuficientes</p>
-                <p class="p-1">Prueba agregando más operaciones</p>
-              </div>
-            </section>
-            <!-- Comienzo reportes con operaciones -->
-            <section class="m-4" id="reporteResumen">
-              <!-- resumen -->
-              <div class="mb-4" id="resumenOperaciones">
-                <p class="text-2xl font-bold mb-4">Resumen</p>
-                <!-- Mayor ganancia -->
-                <div class="columns">
-                  <h4 class="font-bold text-gray-700">Categoría con mayor ganancia</h4>
-                  <div class="">
-                    <span id="resumenMayorGanancia"></span>
-                  </div>
-                  <div>
-                    <span id="resumenMontoMayor"></span>
-                  </div>
-                </div>
-                <!-- Mayor gasto -->
-                <div class="columns">
-                  <h4 class="font-bold text-gray-700">Categoría con mayor gasto</h4>
-                  <div class="">
-                    <span id="resumenMayorGasto"></span>
-                  </div>
-                  <div>
-                    <span id="resumenMontoMayor"></span>
-                  </div>
-                </div>
-                <!-- Mayor balance -->
-                <div class="columns">
-                  <h4 class="font-bold text-gray-700">Categoría con mayor balance</h4>
-                  <div class="">
-                    <span id="resumenMayorBalance"></span>
-                  </div>
-                  <div>
-                    <span id="resumenMontoMayorBalance"></span>
-                  </div>
-                </div>
-                <!-- Mes mayor ganancia -->
-                <div class="columns">
-                  <h4 class="font-bold text-gray-700">Mes con mayor ganancia</h4>
-                  <div class="">
-                    <span id="resumenMayorGanancia"></span>
-                  </div>
-                  <div>
-                    <span id="resumenMontoMayorGanancia"></span>
-                  </div>
-                </div>
-                <!-- Mes mayor gasto -->
-                <div class="columns">
-                  <h4 class="font-bold text-gray-700">Mes con mayor gasto</h4>
-                  <div class="">
-                    <span id="resumenMayorGastoMes"></span>
-                  </div>
-                  <div>
-                    <span id="resumenMontoGastoMes"></span>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <!-- comienzo card Categorías -->
-            <section class="m-4" id="reporteCategorías">
-              <!-- Total categorías -->
-              <div class="mb-4" id="conCategorías">
-                <p class="text-2xl font-bold mb-4">Categorías</p>
-              </div>
-              <div class="flex flex-row gap-9">
-                <!-- total categorias -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Categorías </h4>
-                  <div>
-                    <span id="totalCategorías"></span>
-                  </div>
-                </div>
-                <!-- total ganancia -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Ganancias</h4>
-                  <div>
-                    <span id="totalGanancias"></span>
-                  </div>
-                </div>
-                <!-- total gasto -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Gastos</h4>
-                  <div>
-                    <span id="totalGasto"></span>
-                  </div>
-                </div>
-                <!-- total balance -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Balance</h4>
-                  <div class="">
-                    <span id="totalBalance"></span>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <!-- Comienzo card Mes-->
-            <section class="m-4" id="reporteMes">
-              <!-- Totales por mes -->
-              <div class="mt-4" id="conMes">
-                <p class="text-2xl font-bold mb-4">Totales por mes</p>
-              </div>
-              <div class="flex flex-row gap-9">
-                <!-- Mes categorias -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Mes </h4>
-                  <div>
-                    <span id="reporteMes"></span>
-                  </div>
-                </div>
-                <!-- Mes ganancia -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Ganancias</h4>
-                  <div>
-                    <span id="totalMesGanancias"></span>
-                  </div>
-                </div>
-                <!-- Mes gasto -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Gastos</h4>
-                  <div>
-                    <span id="totalMesGasto"></span>
-                  </div>
-                </div>
-                <!-- Mes balance -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Balance</h4>
-                  <div>
-                    <span id="totalMesBalance"></span>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-    </main>
-    <!-- JS -->
-    <script src="main.js"></script>
-  </body>
+        </div>
+         <!-- FIN CATEGORIAS -->
+  </main>
+  <!-- JS -->
+  <script src="main.js"></script>
+</body>
+
 </html>
