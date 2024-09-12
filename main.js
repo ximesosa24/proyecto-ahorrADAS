@@ -40,3 +40,15 @@ nuevaOperacionBtn.addEventListener('click', function () {
     seccionOperacion.classList.remove('hidden'); 
     seccionOperaciones.classList.add('hidden');  
   });
+
+ /*btn categorias*/
+ const toggleCategoriasBtn = document.getElementById('btn-categorias');
+ const seccionCategorias = document.getElementById('seccion-categorias');
+ 
+ /*btn que solo muestra categorias*/
+ toggleCategoriasBtn.addEventListener('click', function () {
+   seccionCategorias.classList.remove('hidden'); 
+   balance.classList.add('hidden');
+   operaciones.classList.add('hidden'); 
+   filtros.classList.add('hidden'); 
+ });
