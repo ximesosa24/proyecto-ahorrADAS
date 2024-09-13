@@ -1,3 +1,23 @@
+//Menú hamburguesa//
+//Variables//
+const iconoAbrir = document.getElementById ('icono-bars');
+const iconoCerrar = document.getElementById('icono-close');
+const menuNav = document.getElementById('menu');
+
+//Abrir menú//
+iconoAbrir.addEventListener("click", function () {
+    menuNav.classList.remove("hidden");
+    iconoAbrir.classList.add("hidden");
+    iconoCerrar.classList.remove("hidden");
+});
+
+// Cerrar menú
+iconoCerrar.addEventListener("click", function () {
+    menuNav.classList.add("hidden");
+    iconoAbrir.classList.remove("hidden");
+    iconoCerrar.classList.add("hidden");
+});
+
 // Variables
 const toggleBtn = document.getElementById('btn-reportes');
 const card = document.getElementById('seccion-reportes');
@@ -116,4 +136,5 @@ updateBalanceButton.addEventListener('click', function() {
 
     saveBalance(newGanancias, newGastos, newTotal);
 });
+
 
