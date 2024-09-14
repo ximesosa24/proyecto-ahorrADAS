@@ -35,6 +35,7 @@ toggleBtn.addEventListener('click', function () {
   balance.classList.add('hidden'); 
   operaciones.classList.add('hidden');
   filtros.classList.add('hidden');
+  seccionCategorias.classList.add('hidden');
 });
 
 // //Reportes sin operaciones//
@@ -71,6 +72,7 @@ toggleCategoriasBtn.addEventListener('click', function () {
   balance.classList.add('hidden');
   operaciones.classList.add('hidden'); 
   filtros.classList.add('hidden'); 
+  reportes.classList.add('hidden'); 
 });
 
 //Variables//
