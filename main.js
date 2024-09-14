@@ -84,6 +84,24 @@ toggleCategoriasBtn.addEventListener('click', function () {
   operacion.classList.add('hidden');
 });
 
+/*BTN mostrar ocultar filtros*/
+const btnToggleFiltros = document.getElementById('btn-toggle-filtros');
+const seccionFiltros = document.getElementById('seccion-filtros');
+
+let filtrosOcultos = false;
+btnToggleFiltros.addEventListener('click', function () {
+    if (filtrosOcultos) {
+        
+        seccionFiltros.classList.remove('hidden');
+        btnToggleFiltros.textContent = 'Ocultar filtros';
+    } else {
+       
+        seccionFiltros.classList.add('hidden');
+        btnToggleFiltros.textContent = 'Mostrar filtros';
+    }
+    filtrosOcultos = !filtrosOcultos;
+});
+
 //Variables//
 const balanceBtn = document.getElementById ('btn-balance');
 const filtrosCard = document.getElementById ('seccion-filtros');
