@@ -6,7 +6,7 @@ const menuNav = document.getElementById('menu');
 
 //Abrir menú//
 iconoAbrir.addEventListener("click", function () {
-    menuNav.classList.remove("hidden");
+    menuNav.classList.toggle("hidden");
     iconoAbrir.classList.add("hidden");
     iconoCerrar.classList.remove("hidden");
 });
