@@ -36,6 +36,7 @@ toggleBtn.addEventListener('click', function () {
   operaciones.classList.add('hidden');
   filtros.classList.add('hidden');
   seccionCategorias.classList.add('hidden');
+  operacion.classList.add('hidden');
 });
 
 // //Reportes sin operaciones//
@@ -50,7 +51,6 @@ toggleBtn.addEventListener('click', function (){
 const operacion = document.getElementById('seccion-operacion');
 const reportes = document.getElementById('seccion-reportes');
 const nuevaOperacionBtn = document.getElementById('btn-nueva-operacion'); 
-const seccionOperacion = document.getElementById('seccion-operacion'); 
 const seccionOperaciones = document.getElementById('seccion-operaciones'); 
 
 nuevaOperacionBtn.addEventListener('click', function () {
@@ -58,10 +58,18 @@ nuevaOperacionBtn.addEventListener('click', function () {
     balance.classList.add('hidden');       
     reportes.classList.add('hidden');     
     filtros.classList.add('hidden');       
-    seccionOperacion.classList.remove('hidden'); 
     seccionOperaciones.classList.add('hidden');  
   });
 
+
+//SOLO MUESTRA LA NUEVA OPERACION//
+operacion.addEventListener('click',function(){
+    seccionCategorias.classList.add('hidden'); 
+    balance.classList.add('hidden');
+    operaciones.classList.add('hidden'); 
+    filtros.classList.add('hidden'); 
+    reportes.classList.add('hidden'); 
+});
 /*btn categorias*/
 const toggleCategoriasBtn = document.getElementById('btn-categorias');
 const seccionCategorias = document.getElementById('seccion-categorias');
@@ -73,6 +81,7 @@ toggleCategoriasBtn.addEventListener('click', function () {
   operaciones.classList.add('hidden'); 
   filtros.classList.add('hidden'); 
   reportes.classList.add('hidden'); 
+  operacion.classList.add('hidden');
 });
 
 //Variables//
@@ -84,6 +93,8 @@ balanceBtn.addEventListener('click', function() {
   operaciones.classList.remove('hidden');
   filtrosCard.classList.remove('hidden'); 
   card.classList.add ('hidden');
+  seccionCategorias.classList.add('hidden');
+  operacion.classList.add('hidden');
 });
 
 //LocalStorage Balance//
