@@ -24,6 +24,7 @@ const card = document.getElementById('seccion-reportes');
 const balance = document.getElementById('seccion-balance');
 const operaciones = document.getElementById('seccion-operaciones');
 const filtros = document.getElementById ('seccion-filtros');
+const cardFiltros = document.getElementById ('card-filtros');
 const resumenReportes = document.getElementById ('reporteResumen');
 const reporteCategorías = document.getElementById ('reporteCategorías');
 const reporteMes = document.getElementById ('reporteMes');
@@ -37,6 +38,8 @@ toggleBtn.addEventListener('click', function () {
   filtros.classList.add('hidden');
   seccionCategorias.classList.add('hidden');
   operacion.classList.add('hidden');
+  btnToggleFiltros.classList.add('hidden');
+  cardFiltros.classList.add('hidden');
 });
 
 // //Reportes sin operaciones//
@@ -53,22 +56,25 @@ const reportes = document.getElementById('seccion-reportes');
 const nuevaOperacionBtn = document.getElementById('btn-nueva-operacion'); 
 const seccionOperaciones = document.getElementById('seccion-operaciones'); 
 
+//solo se muestra la card de nueva operacion//
 nuevaOperacionBtn.addEventListener('click', function () {
     operacion.classList.remove('hidden'); 
     balance.classList.add('hidden');       
     reportes.classList.add('hidden');     
     filtros.classList.add('hidden');       
     seccionOperaciones.classList.add('hidden');  
+    btnToggleFiltros.classList.add('hidden');
+    cardFiltros.classList.add('hidden');
   });
 
 
-//SOLO MUESTRA LA NUEVA OPERACION//
 operacion.addEventListener('click',function(){
     seccionCategorias.classList.add('hidden'); 
     balance.classList.add('hidden');
     operaciones.classList.add('hidden'); 
     filtros.classList.add('hidden'); 
-    reportes.classList.add('hidden'); 
+    reportes.classList.add('hidden');
+    btnToggleFiltros.classList.remove('hidden');
 });
 /*btn categorias*/
 const toggleCategoriasBtn = document.getElementById('btn-categorias');
@@ -82,21 +88,23 @@ toggleCategoriasBtn.addEventListener('click', function () {
   filtros.classList.add('hidden'); 
   reportes.classList.add('hidden'); 
   operacion.classList.add('hidden');
+  btnToggleFiltros.classList.add('hidden');
+  cardFiltros.classList.add('hidden');
 });
 
 /*BTN mostrar ocultar filtros*/
 const btnToggleFiltros = document.getElementById('btn-toggle-filtros');
-const seccionFiltros = document.getElementById('seccion-filtros');
+
 
 let filtrosOcultos = false;
 btnToggleFiltros.addEventListener('click', function () {
     if (filtrosOcultos) {
         
-        seccionFiltros.classList.remove('hidden');
+        filtros.classList.remove('hidden');
         btnToggleFiltros.textContent = 'Ocultar filtros';
     } else {
        
-        seccionFiltros.classList.add('hidden');
+        filtros.classList.add('hidden');
         btnToggleFiltros.textContent = 'Mostrar filtros';
     }
     filtrosOcultos = !filtrosOcultos;
@@ -104,15 +112,15 @@ btnToggleFiltros.addEventListener('click', function () {
 
 //Variables//
 const balanceBtn = document.getElementById ('btn-balance');
-const filtrosCard = document.getElementById ('seccion-filtros');
 // Mostrar balance//
 balanceBtn.addEventListener('click', function() {
   balance.classList.remove('hidden');
   operaciones.classList.remove('hidden');
-  filtrosCard.classList.remove('hidden'); 
+  filtros.classList.remove('hidden'); 
   card.classList.add ('hidden');
   seccionCategorias.classList.add('hidden');
   operacion.classList.add('hidden');
+  cardFiltros.classList.remove('hidden');
 });
 
 //LocalStorage Balance//
