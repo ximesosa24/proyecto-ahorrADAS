@@ -161,19 +161,107 @@ function saveBalance(ganancias, gastos, total) {
     localStorage.setItem('total', total);
 };
 
-// Evento para actualizar el balance //
-updateBalanceButton.addEventListener('click', function() {
-    let currentGanancias = parseFloat(gananciasElement.textContent.replace('+$', '')) || 0;
-    let currentGastos = parseFloat(gastosElement.textContent.replace('-$', '')) || 0;
-    let newGanancias = currentGanancias + 10;
-    let newGastos = currentGastos + 5;
-    let newTotal = newGanancias - newGastos; 
+// Evento para actualizar el balance-REVISAR //
+// updateBalanceButton.addEventListener('click', function() {
+//     let currentGanancias = parseFloat(gananciasElement.textContent.replace('+$', '')) || 0;
+//     let currentGastos = parseFloat(gastosElement.textContent.replace('-$', '')) || 0;
+//     let newGanancias = currentGanancias + 10;
+//     let newGastos = currentGastos + 5;
+//     let newTotal = newGanancias - newGastos; 
 
-    gananciasElement.textContent = `+$${newGanancias}`;
-    gastosElement.textContent = `-$${newGastos}`;
-    totalElement.textContent = `$${newTotal}`;
+//     gananciasElement.textContent = `+$${newGanancias}`;
+//     gastosElement.textContent = `-$${newGastos}`;
+//     totalElement.textContent = `$${newTotal}`;
 
-    saveBalance(newGanancias, newGastos, newTotal);
+//     saveBalance(newGanancias, newGastos, newTotal);
+// });
+
+//Comienzo funcionalidad CATEGORIAS //
+// Obtener elementos del DOM
+const listaCategorias = document.getElementById('lista-categorias');
+const inputCategoriaNombre = document.getElementById('categoria-nombre');
+const botonAgregarCategoria = document.getElementById('agregar-categoria');
+
+// Función para obtener categorías del almacenamiento local
+function obtenerCategorias() {
+    const categoriasGuardadas = localStorage.getItem('categorias');
+    return categoriasGuardadas ? JSON.parse(categoriasGuardadas) : [];
+}
+
+// Función para guardar categorías en el almacenamiento local
+function guardarCategorias(categorias) {
+    localStorage.setItem('categorias', JSON.stringify(categorias));
+}
+
+// Inicializar categorías desde el almacenamiento local
+let categorias = obtenerCategorias();
+
+
+
+// Función para renderizar categorías
+function renderizarCategorias() {
+    listaCategorias.innerHTML = '';
+    categorias.forEach((categoria) => {
+        const li = document.createElement('li');
+        li.className = 'flex justify-between items-center mb-2';
+        li.innerHTML = `
+            <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">${categoria.nombre}</span>
+            <div>
+                <a href="#" class="text-blue-500 mr-4" id="editar-categoria-${categoria.nombre}">Editar</a>
+                <a href="#" class="text-red-500" id="eliminar-categoria-${categoria.nombre}">Eliminar</a>
+            </div>
+        `;
+        listaCategorias.appendChild(li);
+    });
+}
+
+// Función para editar categoría
+listaCategorias.addEventListener('click', (e) => {
+    if (e.target.id.startsWith('editar-categoria-')) {
+        const nombreCategoria = e.target.id.replace('editar-categoria-', '');
+    }
+});
+
+// Función para eliminar categoría
+listaCategorias.addEventListener('click', (e) => {
+    if (e.target.id.startsWith('eliminar-categoria-')) {
+        const nombreCategoria = e.target.id.replace('eliminar-categoria-', '');
+        categorias = categorias.filter((categoria) => categoria.nombre !== nombreCategoria);
+        guardarCategorias(categorias);
+        renderizarCategorias();
+    }
+});
+
+// Renderizar categorías al inicio
+renderizarCategorias();
+
+// Recuperar la lista de categorías desde localStorage
+const categoriasStorage = localStorage.getItem('categorias');
+if (categoriasStorage) {
+  categorias = JSON.parse(categoriasStorage);
+} else {
+  // Si no hay categorías en localStorage, inicializar con las categorías predeterminadas
+  categorias = [
+    { nombre: 'Comida' },
+    { nombre: 'Servicios' },
+    { nombre: 'Salidas' },
+    { nombre: 'Educación' },
+    { nombre: 'Transporte' },
+    { nombre: 'Trabajo' }
+  ];
+}
+
+
+// Función para agregar categoría
+botonAgregarCategoria.addEventListener('click', () => {
+  const nombreCategoria = inputCategoriaNombre.value.trim();
+  if (nombreCategoria) {
+    categorias.push({ nombre: nombreCategoria });
+    inputCategoriaNombre.value = '';
+    renderizarCategorias();
+    // Almacenar la lista de categorías en localStorage
+    localStorage.setItem('categorias', JSON.stringify(categorias));
+  }
 });
 
 
