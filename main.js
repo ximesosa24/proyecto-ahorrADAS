@@ -251,48 +251,182 @@ renderizarCategorias();
 
 
 // FUNCIONALIDAD DE LA CARD DE NUEVA OPERACION (FUNCIONA POR CONSOLA)//
-botonAgregarOperacion.addEventListener('click', function() {
-    let operaciones = []
-    if(localStorage.getItem('operaciones')) {
-        operaciones = JSON.parse(localStorage.getItem('operaciones'))
-        console.log('huehuehuehu')
-    }
+// botonAgregarOperacion.addEventListener('click', function() {
+//     let operaciones = []
+//     if(localStorage.getItem('operaciones')) {
+//         operaciones = JSON.parse(localStorage.getItem('operaciones'))
+//         console.log('huehuehuehu')
+//     }
   
-    const descripcion = document.querySelector('#descripcion-operacion').value
-    const monto = Number(document.querySelector('#monto-operacion').value)
-    const tipo = document.querySelector('#tipo-operacion').value
-    const categoria = document.querySelector('#categoria-operacion').value
-    const fecha = document.querySelector('#fecha-operacion').value
+//     const descripcion = document.querySelector('#descripcion-operacion').value
+//     const monto = Number(document.querySelector('#monto-operacion').value)
+//     const tipo = document.querySelector('#tipo-operacion').value
+//     const categoria = document.querySelector('#categoria-operacion').value
+//     const fecha = document.querySelector('#fecha-operacion').value
   
-    const nuevaOperacion = {
-        id: idAleatorio(),
-        descripcion,
-        tipo,
-        monto,
-        categoria,
-        fecha,
-     }
-    operaciones = [...operaciones,nuevaOperacion]
-    localStorage.setItem('operaciones',JSON.stringify(operaciones))
-  });
+//     const nuevaOperacion = {
+//         id: idAleatorio(),
+//         descripcion,
+//         tipo,
+//         monto,
+//         categoria,
+//         fecha,
+//      }
+//     operaciones = [...operaciones,nuevaOperacion]
+//     localStorage.setItem('operaciones',JSON.stringify(operaciones))
+//   });
 
 
-// Función para agregar categoría
-botonAgregarCategoria.addEventListener('click', function() {
-  const nombreCategoria = inputCategoriaNombre.value.trim();
-  if (nombreCategoria) {
-    categorias.push({ nombre: nombreCategoria });
-    inputCategoriaNombre.value = '';
-    renderizarCategorias();
-    // Almacenar la lista de categorías en localStorage
-    localStorage.setItem('categorias', JSON.stringify(categorias));
-  }
-});
+// // Función para agregar categoría
+// botonAgregarCategoria.addEventListener('click', function() {
+//   const nombreCategoria = inputCategoriaNombre.value.trim();
+//   if (nombreCategoria) {
+//     categorias.push({ nombre: nombreCategoria });
+//     inputCategoriaNombre.value = '';
+//     renderizarCategorias();
+//     // Almacenar la lista de categorías en localStorage
+//     localStorage.setItem('categorias', JSON.stringify(categorias));
+//   }
+// });
 
-function idAleatorio() {
-    return Math.floor(Math.random() * 10000);
-  }
+// function idAleatorio() {
+//     return Math.floor(Math.random() * 10000);
+//   }
 
 
 // -------------------------------------------------------------------------------------------------------------------//
+//FUNCIONALIDAD AGREGAR OPERACIONES - RESTA CORREGIR funcion de editar y recarga de pagina al ingresar nuevas operaciones //
+document.addEventListener('DOMContentLoaded', () => {;
 
+    const btnNuevaOperacion = document.getElementById('btn-nueva-operacion');
+    const seccionOperacion = document.getElementById('seccion-operacion');
+    const agregarOperacion = document.getElementById('agregar-operacion');
+    const imagenSaving = document.getElementById('imagen-saving');
+    const contenedorOperaciones = document.getElementById('conOperaciones');
+
+    // Mostrar la sección de nueva operación al hacer clic en el botón
+    btnNuevaOperacion.addEventListener('click', () => {
+    seccionOperacion.classList.remove('hidden');
+    });
+
+    // Ocultar la sección de nueva operación al hacer clic en el botón de cancelar
+    document.querySelector('.bg-gray-300').addEventListener('click', (event) => {
+    event.preventDefault();
+    seccionOperacion.classList.add('hidden');
+    });
+
+    // Función para agregar operación
+    agregarOperacion.addEventListener('click', (event) => {
+      event.preventDefault(); // Evita el envío del formulario
+
+    const descripcion = document.getElementById('descripcion-operacion').value;
+    const monto = document.getElementById('monto-operacion').value;
+    const tipo = document.getElementById('tipo-operacion').value;
+    const categoria = document.getElementById('categoria-operacion').value;
+    const fecha = document.getElementById('fecha-operacion').value;
+  
+    console.log(descripcion, monto, tipo, categoria, fecha);
+
+    if (descripcion && monto && tipo && categoria && fecha) {
+        const operacion = {
+        descripcion,
+        monto,
+        tipo,
+        categoria,
+        fecha
+        };
+
+        // Recuperar operaciones del Local Storage
+        let operaciones = JSON.parse(localStorage.getItem('operaciones')) || [];
+        operaciones.push(operacion);
+        localStorage.setItem('operaciones', JSON.stringify(operaciones));
+
+        // Ocultar la sección de nueva operación
+        seccionOperacion.classList.add('hidden');
+
+        document.querySelector('form').reset();
+
+        // Actualizar la vista
+        mostrarOperaciones();
+    } else {
+        alert('Por favor, llená todos los campos.');
+        }
+    });
+
+    // Función para mostrar operaciones desde Local Storage
+    function mostrarOperaciones() {
+        const operaciones = JSON.parse(localStorage.getItem('operaciones')) || [];
+      contenedorOperaciones.innerHTML = ''; // Limpiar el contenedor
+
+    if (operaciones.length === 0) {
+        imagenSaving.classList.remove('hidden');
+    } else {
+        imagenSaving.classList.add('hidden');
+        operaciones.forEach((operacion, index) => {
+        const operacionHTML = `
+            <div class="flex flex-row gap-9 mb-4">
+            <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Descripción</h4>
+                <div>
+                <span>${operacion.descripcion}</span>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Categoría</h4>
+                <div>
+                <span>${operacion.categoria}</span>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Fecha</h4>
+                <div>
+                <span>${operacion.fecha}</span>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Monto</h4>
+                <div>
+                <span>${operacion.monto}</span>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Acciones</h4>
+                <div>
+                <button class="editar" data-index="${index}">editar</button>
+                <button class="borrar" data-index="${index}">borrar</button>
+                </div>
+            </div>
+            </div>
+        `;
+        contenedorOperaciones.insertAdjacentHTML('beforeend', operacionHTML);
+        });
+        
+        // Agregar funcionalidad para editar y borrar
+        document.querySelectorAll('.editar').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const index = e.target.getAttribute('data-index');
+            // corregir a input //
+            alert("editar operación");
+        });
+        });
+
+        document.querySelectorAll('.borrar').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const index = e.target.getAttribute('data-index');
+            eliminarOperacion(index);
+        });
+        });
+    }
+    }
+
+    // Función para eliminar una operación
+    function eliminarOperacion(index) {
+      let operaciones = JSON.parse(localStorage.getItem('operaciones')) || [];
+      operaciones.splice(index, 1);
+      localStorage.setItem('operaciones', JSON.stringify(operaciones));
+      mostrarOperaciones();
+    }
+  
+    // Mostrar operaciones al cargar la página
+    mostrarOperaciones();
+  });

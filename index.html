@@ -118,7 +118,7 @@
           <!-- SIN OPERACIONES -->
           <div class="flex justify-between items-center mb-8">
             <h2 class="text-lg sm:text-xl font-semibold">Operaciones</h2>
-            <button id="btn-nueva-operacion"
+            <button type="button" id="btn-nueva-operacion"
               class="bg-purple-500 text-white py-1 px-3 sm:py-2 sm:px-4 rounded hover:bg-pink-600 focus:outline-none text-xs sm:text-sm">
               + Nueva operación
             </button>
@@ -135,28 +135,28 @@
                 <div class="flex flex-col">
                   <h4 class="font-bold text-gray-700">Descripción </h4>
                   <div>
-                    <span id="DescripcionOperaciones"></span>
+                    <span"></span>
                   </div>
                 </div>
                 <!-- Categoría -->
                 <div class="flex flex-col">
                   <h4 class="font-bold text-gray-700">Categoría</h4>
                   <div>
-                    <span id="gananciasOperaciones"></span>
+                    <span></span>
                   </div>
                 </div>
                 <!-- Fecha-->
                 <div class="flex flex-col">
                   <h4 class="font-bold text-gray-700">Fecha</h4>
                   <div>
-                    <span id="fechaOperaciones"></span>
+                    <span></span>
                   </div>
                 </div>
                 <!-- Monto -->
                 <div class="flex flex-col">
                   <h4 class="font-bold text-gray-700">Monto</h4>
                   <div>
-                    <span id="MontoOperaciones"></span>
+                    <span></span>
                   </div>
                 </div>
                 <!-- Acciones -->
@@ -178,7 +178,7 @@
       <div>
         <!-- Sección Nueva Operación -->
         <div class="flex items-center justify-center mt-4">
-          <div id="seccion-operacion" class="w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-white rounded-lg shadow-lg hidden">
+          <div id="seccion-operacion" class="w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-white rounded-lg shadow-lg ">
             <h2 class="text-xl font-semibold mb-4">Nueva Operación</h2>
             <form>
               <div class="mb-6">
@@ -223,7 +223,7 @@
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required>
               </div>
-              <button type="submit" id="agregar-operacion"
+              <button type="button" id="agregar-operacion"
                 class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">Agregar
                 Operación</button>
               <button type="button"
