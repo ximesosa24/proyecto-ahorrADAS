@@ -182,6 +182,20 @@ const listaCategorias = document.getElementById('lista-categorias');
 const inputCategoriaNombre = document.getElementById('categoria-nombre');
 const botonAgregarCategoria = document.getElementById('agregar-categoria');
 
+let categorias = obtenerCategorias();
+let categoriaEditando = null; 
+
+// Función para agregar categoría
+botonAgregarCategoria.addEventListener('click', () => {
+    const nombreCategoria = inputCategoriaNombre.value.trim();
+    if (nombreCategoria) {
+        categorias.push({ nombre: nombreCategoria });
+        inputCategoriaNombre.value = '';
+        renderizarCategorias();
+        guardarCategorias(categorias);
+    }
+});
+
 // Función para obtener categorías del almacenamiento local
 function obtenerCategorias() {
     const categoriasGuardadas = localStorage.getItem('categorias');
@@ -192,11 +206,6 @@ function obtenerCategorias() {
 function guardarCategorias(categorias) {
     localStorage.setItem('categorias', JSON.stringify(categorias));
 }
-
-// Inicializar categorías desde el almacenamiento local
-let categorias = obtenerCategorias();
-
-
 
 // Función para renderizar categorías
 function renderizarCategorias() {
@@ -215,53 +224,44 @@ function renderizarCategorias() {
     });
 }
 
+// Función para mostrar el formulario de edición
+function mostrarFormularioEdicion(categoria) {
+    inputCategoriaNombre.value = categoria.nombre;
+    categoriaEditando = categoria;
+}
+
+// Función para ocultar el formulario de edición
+function ocultarFormularioEdicion() {
+    inputCategoriaNombre.value = '';
+    categoriaEditando = null;
+}
+
 // Función para editar categoría
 listaCategorias.addEventListener('click', (e) => {
     if (e.target.id.startsWith('editar-categoria-')) {
-        const nombreCategoria = e.target.id.replace('editar-categoria-', '');
-    }
-});
-
-// Función para eliminar categoría
-listaCategorias.addEventListener('click', (e) => {
-    if (e.target.id.startsWith('eliminar-categoria-')) {
+        const nombreCategoriaAntiguo = e.target.id.replace('editar-categoria-', '');
+        const categoria = categorias.find(c => c.nombre === nombreCategoriaAntiguo);
+        if (categoria) {
+            mostrarFormularioEdicion(categoria);
+        }
+    } else if (e.target.id.startsWith('eliminar-categoria-')) {
         const nombreCategoria = e.target.id.replace('eliminar-categoria-', '');
-        categorias = categorias.filter((categoria) => categoria.nombre !== nombreCategoria);
+        categorias = categorias.filter(categoria => categoria.nombre !== nombreCategoria);
         guardarCategorias(categorias);
         renderizarCategorias();
     }
 });
 
-// Renderizar categorías al inicio
-renderizarCategorias();
-
-// Recuperar la lista de categorías desde localStorage
-const categoriasStorage = localStorage.getItem('categorias');
-if (categoriasStorage) {
-  categorias = JSON.parse(categoriasStorage);
-} else {
-  // Si no hay categorías en localStorage, inicializar con las categorías predeterminadas
-  categorias = [
-    { nombre: 'Comida' },
-    { nombre: 'Servicios' },
-    { nombre: 'Salidas' },
-    { nombre: 'Educación' },
-    { nombre: 'Transporte' },
-    { nombre: 'Trabajo' }
-  ];
-}
-
-
 // Función para agregar categoría
 botonAgregarCategoria.addEventListener('click', () => {
-  const nombreCategoria = inputCategoriaNombre.value.trim();
-  if (nombreCategoria) {
-    categorias.push({ nombre: nombreCategoria });
-    inputCategoriaNombre.value = '';
-    renderizarCategorias();
-    // Almacenar la lista de categorías en localStorage
-    localStorage.setItem('categorias', JSON.stringify(categorias));
-  }
+    const nombreCategoria = inputCategoriaNombre.value.trim();
+    if (nombreCategoria) {
+        categorias.push({ nombre: nombreCategoria });
+        inputCategoriaNombre.value = '';
+        renderizarCategorias();
+        guardarCategorias(categorias);
+    }
 });
 
-
+// Renderizar categorías al inicio
+renderizarCategorias();
