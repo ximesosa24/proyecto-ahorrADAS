@@ -4,6 +4,16 @@ const iconoAbrir = document.getElementById ('icono-bars');
 const iconoCerrar = document.getElementById('icono-close');
 const menuNav = document.getElementById('menu');
 
+const toggleBtn = document.getElementById('btn-reportes');
+const card = document.getElementById('seccion-reportes');
+const balance = document.getElementById('seccion-balance');
+const operaciones = document.getElementById('seccion-operaciones');
+const filtros = document.getElementById ('seccion-filtros');
+const cardFiltros = document.getElementById ('card-filtros');
+const resumenReportes = document.getElementById ('reporteResumen');
+const reporteCategorías = document.getElementById ('reporteCategorías');
+const reporteMes = document.getElementById ('reporteMes');
+
 //Abrir menú//
 iconoAbrir.addEventListener("click", function () {
     menuNav.classList.toggle("hidden");
@@ -18,16 +28,8 @@ iconoCerrar.addEventListener("click", function () {
     iconoCerrar.classList.add("hidden");
 });
 
-// Variables
-const toggleBtn = document.getElementById('btn-reportes');
-const card = document.getElementById('seccion-reportes');
-const balance = document.getElementById('seccion-balance');
-const operaciones = document.getElementById('seccion-operaciones');
-const filtros = document.getElementById ('seccion-filtros');
-const cardFiltros = document.getElementById ('card-filtros');
-const resumenReportes = document.getElementById ('reporteResumen');
-const reporteCategorías = document.getElementById ('reporteCategorías');
-const reporteMes = document.getElementById ('reporteMes');
+
+
 
 
 // Mostrar solo reportes //
@@ -161,26 +163,13 @@ function saveBalance(ganancias, gastos, total) {
     localStorage.setItem('total', total);
 };
 
-// Evento para actualizar el balance-REVISAR //
-// updateBalanceButton.addEventListener('click', function() {
-//     let currentGanancias = parseFloat(gananciasElement.textContent.replace('+$', '')) || 0;
-//     let currentGastos = parseFloat(gastosElement.textContent.replace('-$', '')) || 0;
-//     let newGanancias = currentGanancias + 10;
-//     let newGastos = currentGastos + 5;
-//     let newTotal = newGanancias - newGastos; 
-
-//     gananciasElement.textContent = `+$${newGanancias}`;
-//     gastosElement.textContent = `-$${newGastos}`;
-//     totalElement.textContent = `$${newTotal}`;
-
-//     saveBalance(newGanancias, newGastos, newTotal);
-// });
 
 //Comienzo funcionalidad CATEGORIAS //
 // Obtener elementos del DOM
 const listaCategorias = document.getElementById('lista-categorias');
 const inputCategoriaNombre = document.getElementById('categoria-nombre');
 const botonAgregarCategoria = document.getElementById('agregar-categoria');
+const botonAgregarOperacion = document.getElementById('agregar-operacion');
 
 let categorias = obtenerCategorias();
 let categoriaEditando = null; 
@@ -259,3 +248,51 @@ botonAgregarCategoria.addEventListener('click', () => {
 
 // Renderizar categorías al inicio
 renderizarCategorias();
+
+
+// FUNCIONALIDAD DE LA CARD DE NUEVA OPERACION (FUNCIONA POR CONSOLA)//
+botonAgregarOperacion.addEventListener('click', function() {
+    let operaciones = []
+    if(localStorage.getItem('operaciones')) {
+        operaciones = JSON.parse(localStorage.getItem('operaciones'))
+        console.log('huehuehuehu')
+    }
+  
+    const descripcion = document.querySelector('#descripcion-operacion').value
+    const monto = Number(document.querySelector('#monto-operacion').value)
+    const tipo = document.querySelector('#tipo-operacion').value
+    const categoria = document.querySelector('#categoria-operacion').value
+    const fecha = document.querySelector('#fecha-operacion').value
+  
+    const nuevaOperacion = {
+        id: idAleatorio(),
+        descripcion,
+        tipo,
+        monto,
+        categoria,
+        fecha,
+     }
+    operaciones = [...operaciones,nuevaOperacion]
+    localStorage.setItem('operaciones',JSON.stringify(operaciones))
+  });
+
+
+// Función para agregar categoría
+botonAgregarCategoria.addEventListener('click', function() {
+  const nombreCategoria = inputCategoriaNombre.value.trim();
+  if (nombreCategoria) {
+    categorias.push({ nombre: nombreCategoria });
+    inputCategoriaNombre.value = '';
+    renderizarCategorias();
+    // Almacenar la lista de categorías en localStorage
+    localStorage.setItem('categorias', JSON.stringify(categorias));
+  }
+});
+
+function idAleatorio() {
+    return Math.floor(Math.random() * 10000);
+  }
+
+
+// -------------------------------------------------------------------------------------------------------------------//
+
