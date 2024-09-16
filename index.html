@@ -12,26 +12,26 @@
 
 <body>
   <!-- NAV BAR -->
-  <header>
+  <header></header>
     <nav class="bg-purple-500 p-7 gap-6 text-white sm:flex sm:items-center sm:justify-between">
-      <section class="flex justify-between">
+      <section class="flex items-center justify-between w-full">
         <button class="flex text-4xl hover:bg-pink-600 rounded font-bold">
           <i class="fa-solid fa-wallet p-1"></i>
           AhorrADAs
         </button>
         <span class="sm:hidden" id="icono-bars">
-          <i class="fa-solid fa-bars justify-end cursor-pointer" ></i>
+          <i class="fa-solid fa-bars justify-end cursor-pointer"></i>
         </span>
-        <span class="sm:hidden hidden"  id="icono-close">
+        <span class="sm:hidden hidden" id="icono-close">
           <i class="fa-solid fa-close justify-end cursor-pointer"></i>
         </span>
       </section>
-      <div class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row hidden md:flex"id="menu">
-        <a href="#Balance" id="btn-balance" class="hover:bg-pink-600 rounded 2xl:w-full">
+      <div class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row hidden md:flex" id="menu">
+        <a href="#Balance" id="btn-balance" class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4">
           <i class="fa-solid fa-arrow-trend-up p-1"></i>Balance</a>
-        <a href="#Categorías" id="btn-categorias" class="hover:bg-pink-600 rounded 2xl:w-full">
+        <a href="#Categorías" id="btn-categorias" class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4">
           <i class="fa-solid fa-tag p-1"></i>Categorías</a>
-        <a href="#Reportes" id="btn-reportes" class="hover:bg-pink-600 rounded 2xl:w-full">
+        <a href="#Reportes" id="btn-reportes" class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4 ">
           <i class="fas fa-chart-pie p-1"></i> Reportes</a>
       </div>
     </nav>
@@ -67,19 +67,23 @@
                 Ocultar filtros
               </button>
             </div>
+
             <form id="seccion-filtros">
-              <div class="mb-4">
-                <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
-                <select id="tipo"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                  <option>Todos</option>
-                  <option>Ganancias</option>
-                  <option>Gastos</option>
-                </select>
+              <div id="filtrar-datos">
+                <div class="mb-4">
+                  <label for="filtro-tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
+                  <select id="filtro-tipo"
+                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                    <option selected value="TODOS">Todos</option>
+                    <option value="GASTO">Gasto</option>
+                    <option value="GANANCIA">Ganancia</option>
+                  </select>
+                </div>
               </div>
+
               <div class="mb-4">
-                <label for="categoria" class="block text-sm font-medium text-gray-700">Categoría</label>
-                <select id="categoria"
+                <label for="filtro-categoria" class="block text-sm font-medium text-gray-700">Categoría</label>
+                <select id="filtro-categoria"
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                   <option>Todas</option>
                   <option>Comida</option>
@@ -92,20 +96,20 @@
                 </select>
               </div>
               <div class="mb-4">
-                <label for="desde" class="block text-sm font-medium text-gray-700">Desde</label>
-                <input type="date" id="desde"
+                <label for="filtro-fecha" class="block text-sm font-medium text-gray-700">Desde</label>
+                <input type="date" id="filtro-fecha"
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
               </div>
               <div class="mb-4">
-                <label for="ordenar" class="block text-sm font-medium text-gray-700">Ordenar por</label>
-                <select id="ordenar"
+                <label for="filtro-ordenar" class="block text-sm font-medium text-gray-700">Ordenar por</label>
+                <select id="filtro-ordenar"
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                  <option>Más reciente</option>
-                  <option>Menos reciente</option>
-                  <option>Mayor monto</option>
-                  <option>Menor monto</option>
-                  <option>A/Z</option>
-                  <option>Z/A</option>
+                  <option value="MAS RECIENTES">Más recientes</option>
+                  <option value="MENOS RECIENTES">Menos recientes</option>
+                  <option value="MAYOR MONTO">Mayor monto</option>
+                  <option value="MENOR MONTO">Menor monto</option>
+                  <option value="A/Z">A/Z</option>
+                  <option value="Z/A">Z/A</option>
                 </select>
               </div>
             </form>
