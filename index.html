@@ -110,11 +110,12 @@
               </div>
             </form>
           </div>
-          
+
         </div>
 
         <!-- CARD OPERACIONES -->
         <div id="seccion-operaciones" class="w-full md:w-1/2 lg:w-2/3 rounded-lg bg-white shadow-lg p-4 sm:p-6 lg:p-8">
+          <!-- SIN OPERACIONES -->
           <div class="flex justify-between items-center mb-8">
             <h2 class="text-lg sm:text-xl font-semibold">Operaciones</h2>
             <button id="btn-nueva-operacion"
@@ -122,10 +123,53 @@
               + Nueva operación
             </button>
           </div>
-          <div class="flex flex-col items-center justify-center h-75">
+          <div class="flex flex-col items-center justify-center h-75" id="imagen-saving">
             <img src="./assets/img/saving.png" alt="imagen saving" class="mb-4 w-1/2" />
             <p class="text-gray-500">Sin resultados</p>
             <p class="text-sm text-gray-400">Cambia los filtros o agrega operaciones</p>
+          </div>
+          <!-- CON OPERACIONES -->
+            <section class="m-4" id="conOperaciones">
+              <div class="flex flex-row gap-9">
+                <!-- Descripción -->
+                <div class="flex flex-col">
+                  <h4 class="font-bold text-gray-700">Descripción </h4>
+                  <div>
+                    <span id="DescripcionOperaciones"></span>
+                  </div>
+                </div>
+                <!-- Categoría -->
+                <div class="flex flex-col">
+                  <h4 class="font-bold text-gray-700">Categoría</h4>
+                  <div>
+                    <span id="gananciasOperaciones"></span>
+                  </div>
+                </div>
+                <!-- Fecha-->
+                <div class="flex flex-col">
+                  <h4 class="font-bold text-gray-700">Fecha</h4>
+                  <div>
+                    <span id="fechaOperaciones"></span>
+                  </div>
+                </div>
+                <!-- Monto -->
+                <div class="flex flex-col">
+                  <h4 class="font-bold text-gray-700">Monto</h4>
+                  <div>
+                    <span id="MontoOperaciones"></span>
+                  </div>
+                </div>
+                <!-- Acciones -->
+                <div class="flex flex-col">
+                  <h4 class="font-bold text-gray-700">Acciones</h4>
+                  <div>
+                    <button id="editar">editar</button>
+                    <button id="borrarOperaciones">borrar</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
           </div>
         </div>
       </div>
