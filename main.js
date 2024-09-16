@@ -185,17 +185,6 @@ const botonAgregarCategoria = document.getElementById('agregar-categoria');
 let categorias = obtenerCategorias();
 let categoriaEditando = null; 
 
-// Función para agregar categoría
-botonAgregarCategoria.addEventListener('click', () => {
-    const nombreCategoria = inputCategoriaNombre.value.trim();
-    if (nombreCategoria) {
-        categorias.push({ nombre: nombreCategoria });
-        inputCategoriaNombre.value = '';
-        renderizarCategorias();
-        guardarCategorias(categorias);
-    }
-});
-
 // Función para obtener categorías del almacenamiento local
 function obtenerCategorias() {
     const categoriasGuardadas = localStorage.getItem('categorias');
@@ -236,7 +225,7 @@ function ocultarFormularioEdicion() {
     categoriaEditando = null;
 }
 
-// Función para editar categoría
+// Función para manejar el clic en editar o eliminar
 listaCategorias.addEventListener('click', (e) => {
     if (e.target.id.startsWith('editar-categoria-')) {
         const nombreCategoriaAntiguo = e.target.id.replace('editar-categoria-', '');
@@ -252,14 +241,19 @@ listaCategorias.addEventListener('click', (e) => {
     }
 });
 
-// Función para agregar categoría
+// Función para agregar o actualizar categoría
 botonAgregarCategoria.addEventListener('click', () => {
     const nombreCategoria = inputCategoriaNombre.value.trim();
     if (nombreCategoria) {
-        categorias.push({ nombre: nombreCategoria });
+        if (categoriaEditando) {
+            categoriaEditando.nombre = nombreCategoria;
+            categoriaEditando = null;
+        } else {
+            categorias.push({ nombre: nombreCategoria });
+        }
         inputCategoriaNombre.value = '';
-        renderizarCategorias();
         guardarCategorias(categorias);
+        renderizarCategorias();
     }
 });
 
