@@ -4,15 +4,45 @@ const iconoAbrir = document.getElementById ('icono-bars');
 const iconoCerrar = document.getElementById('icono-close');
 const menuNav = document.getElementById('menu');
 
-const toggleBtn = document.getElementById('btn-reportes');
+
 const card = document.getElementById('seccion-reportes');
-const balance = document.getElementById('seccion-balance');
-const operaciones = document.getElementById('seccion-operaciones');
-const filtros = document.getElementById ('seccion-filtros');
-const cardFiltros = document.getElementById ('card-filtros');
+const reportes = document.getElementById('seccion-reportes');
 const resumenReportes = document.getElementById ('reporteResumen');
 const reporteCategorías = document.getElementById ('reporteCategorías');
 const reporteMes = document.getElementById ('reporteMes');
+const toggleBtn = document.getElementById('btn-reportes');
+
+
+const balance = document.getElementById('seccion-balance');
+const balanceBtn = document.getElementById ('btn-balance');
+
+
+const operaciones = document.getElementById('seccion-operaciones');
+const seccionOperaciones = document.getElementById('seccion-operaciones'); 
+const operacion = document.getElementById('seccion-operacion');
+const nuevaOperacionBtn = document.getElementById('btn-nueva-operacion'); 
+
+
+const filtros = document.getElementById ('seccion-filtros');
+const cardFiltros = document.getElementById ('card-filtros');
+const btnToggleFiltros = document.getElementById('btn-toggle-filtros');
+const filtroTipo = document.getElementById('filtro-tipo');
+const filtroCategoria = document.getElementById('filtro-categoria');
+const filtroFecha = document.getElementById('filtro-fecha');
+const filtroOrdenar = document.getElementById('filtro-ordenar');
+
+
+
+const seccionCategorias = document.getElementById('seccion-categorias');
+const toggleCategoriasBtn = document.getElementById('btn-categorias');
+
+
+const gananciasElement = document.getElementById('ganancias');
+const gastosElement = document.getElementById('gastos');
+const totalElement = document.getElementById('total');
+
+
+
 
 //Abrir menú//
 iconoAbrir.addEventListener("click", function () {
@@ -52,12 +82,6 @@ toggleBtn.addEventListener('click', function (){
 });
 
 
-// BTN NUEVA OPERACION - ENRUTADO - HIDDEN //
-const operacion = document.getElementById('seccion-operacion');
-const reportes = document.getElementById('seccion-reportes');
-const nuevaOperacionBtn = document.getElementById('btn-nueva-operacion'); 
-const seccionOperaciones = document.getElementById('seccion-operaciones'); 
-
 //solo se muestra la card de nueva operacion//
 nuevaOperacionBtn.addEventListener('click', function () {
     operacion.classList.remove('hidden'); 
@@ -78,9 +102,7 @@ operacion.addEventListener('click',function(){
     reportes.classList.add('hidden');
     btnToggleFiltros.classList.remove('hidden');
 });
-/*btn categorias*/
-const toggleCategoriasBtn = document.getElementById('btn-categorias');
-const seccionCategorias = document.getElementById('seccion-categorias');
+
 
 /*btn que solo muestra categorias*/
 toggleCategoriasBtn.addEventListener('click', function () {
@@ -94,8 +116,8 @@ toggleCategoriasBtn.addEventListener('click', function () {
   cardFiltros.classList.add('hidden');
 });
 
-/*BTN mostrar ocultar filtros*/
-const btnToggleFiltros = document.getElementById('btn-toggle-filtros');
+
+
 
 
 let filtrosOcultos = false;
@@ -112,8 +134,8 @@ btnToggleFiltros.addEventListener('click', function () {
     filtrosOcultos = !filtrosOcultos;
 });
 
-//Variables//
-const balanceBtn = document.getElementById ('btn-balance');
+
+
 // Mostrar balance//
 balanceBtn.addEventListener('click', function() {
   balance.classList.remove('hidden');
@@ -125,12 +147,78 @@ balanceBtn.addEventListener('click', function() {
   cardFiltros.classList.remove('hidden');
 });
 
-//LocalStorage Balance//
-//Variables//
-const gananciasElement = document.getElementById('ganancias');
-const gastosElement = document.getElementById('gastos');
-const totalElement = document.getElementById('total');
 
+
+/*FUNCIONALIDAD FILTRAR Y ORDENAR*/
+const obtenerOperaciones = () => {
+    return JSON.parse(localStorage.getItem("operaciones-matematicas")) || [];
+  };
+  
+  let operation = obtenerOperaciones();
+  
+  const filtroDatos = (e) => {
+    const porCategoria = filtroCategoria.value;
+    const porTipo = filtroTipo.value;
+    const porFecha = filtroFecha.value ? new Date(filtroFecha.value) : null;
+    
+    let operaciones = obtenerOperaciones();
+  
+    // Filtrar por fecha si se ha seleccionado una
+    if (porFecha) {
+      operaciones = operaciones.filter(
+        (operation) => new Date(operation.fecha) >= porFecha
+      );
+    }
+    // Filtrar por tipo de operación
+    if (porTipo !== "TODOS") {
+      operaciones = operaciones.filter(
+        (operation) => operation.tipo === porTipo
+      );
+    }
+    // Filtrar por categoría
+    if (porCategoria !== "TODOS") {
+      operaciones = operaciones.filter(
+        (operation) => operation.categoria === porCategoria
+      );
+    }
+    // Ordenar las operaciones
+    if (filtroOrdenar.value === "MENOR MONTO") {
+      operaciones = operaciones.sort((a, b) => Number(a.monto) - Number(b.monto));
+    }
+    if (filtroOrdenar.value === "MAYOR MONTO") {
+      operaciones = operaciones.sort((a, b) => Number(b.monto) - Number(a.monto));
+    }
+    if (filtroOrdenar.value === "A/Z") {
+      operaciones = operaciones.sort((a, b) => a.descripcion.toLowerCase().localeCompare(b.descripcion.toLowerCase()));
+    }
+    if (filtroOrdenar.value === "Z/A") {
+      operaciones = operaciones.sort((a, b) => b.descripcion.toLowerCase().localeCompare(a.descripcion.toLowerCase()));
+    }
+    if (filtroOrdenar.value === "MAS RECIENTES") {
+      operaciones = operaciones.sort(
+        (a, b) => new Date(b.fecha) - new Date(a.fecha)
+      );
+    }
+  
+    if (filtroOrdenar.value === "MENOS RECIENTES") {
+      operaciones = operaciones.sort(
+        (a, b) => new Date(a.fecha) - new Date(b.fecha)
+      );
+    }
+  };
+  
+  // Escuchar los cambios en los filtros
+  filtroCategoria.addEventListener("change", filtroDatos);
+  filtroTipo.addEventListener("change", filtroDatos);
+  filtroFecha.addEventListener("change", filtroDatos);
+  filtroOrdenar.addEventListener("change", filtroDatos);
+  
+
+
+
+
+
+//LocalStorage Balance//
 // Cargar los datos del balance desde localStorage
 function loadBalance() {
     const savedGanancias = localStorage.getItem('ganancias');
@@ -250,6 +338,8 @@ botonAgregarCategoria.addEventListener('click', () => {
 renderizarCategorias();
 
 
+
+
 // FUNCIONALIDAD DE LA CARD DE NUEVA OPERACION (FUNCIONA POR CONSOLA)//
 // botonAgregarOperacion.addEventListener('click', function() {
 //     let operaciones = []
@@ -358,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {;
         const operaciones = JSON.parse(localStorage.getItem('operaciones')) || [];
       contenedorOperaciones.innerHTML = ''; // Limpiar el contenedor
 
+
     if (operaciones.length === 0) {
         imagenSaving.classList.remove('hidden');
     } else {
@@ -430,3 +521,4 @@ document.addEventListener('DOMContentLoaded', () => {;
     // Mostrar operaciones al cargar la página
     mostrarOperaciones();
   });
+
