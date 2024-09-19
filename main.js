@@ -495,10 +495,26 @@ document.addEventListener('DOMContentLoaded', () => {;
         // Agregar funcionalidad para editar y borrar
         document.querySelectorAll('.editar').forEach(button => {
         button.addEventListener('click', (e) => {
+          console.log("Bot");
             const index = e.target.getAttribute('data-index');
-            // corregir a input //
-            alert("editar operación");
-        });
+            seccionOperacion.classList.remove('hidden');
+            contenedorOperaciones.classList.add('hidden');
+            cardFiltros.classList.add('hidden');
+            balance.classList.add('hidden');
+            const sectoroperaciones=document.getElementById('seccion-operaciones').classList.add('hidden');
+        
+            const operacion = operaciones[index];
+            document.getElementById('descripcion-operacion').value = operacion.descripcion;
+            document.getElementById('monto-operacion').value = operacion.monto;
+            document.getElementById('tipo-operacion').value = operacion.tipo;
+            document.getElementById('categoria-operacion').value = operacion.categoria;
+            document.getElementById('fecha-operacion').value = operacion.fecha;
+    
+            //Cambiar el texto del botón "Agregar" a "Actualizar"
+            const agregarBtn = document.getElementById('agregar-operacion');
+            agregarBtn.textContent = "Actualizar Operación";
+            agregarBtn.onclick = () => actualizarOperacion(index);
+          });
         });
 
         document.querySelectorAll('.borrar').forEach(button => {
