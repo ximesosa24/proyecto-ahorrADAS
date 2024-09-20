@@ -12,26 +12,29 @@
 
 <body>
   <!-- NAV BAR -->
-  <header></header>
+  <header>
     <nav class="bg-purple-500 p-7 gap-6 text-white sm:flex sm:items-center sm:justify-between">
       <section class="flex items-center justify-between w-full">
-        <button class="flex text-4xl hover:bg-pink-600 rounded font-bold">
+        <button id="href-main-screen"  class="flex text-4xl hover:bg-pink-600 rounded font-bold">
           <i class="fa-solid fa-wallet p-1"></i>
           AhorrADAs
         </button>
-        <span class="sm:hidden" id="icono-bars">
+        <span class="sm:hidden" id="icono-abrir-menu">
           <i class="fa-solid fa-bars justify-end cursor-pointer"></i>
         </span>
-        <span class="sm:hidden hidden" id="icono-close">
+        <span class="sm:hidden hidden" id="icono-cerrar-menu">
           <i class="fa-solid fa-close justify-end cursor-pointer"></i>
         </span>
       </section>
       <div class="flex flex-col items-start gap-2 cursor-pointer sm:m-0 sm:flex-row hidden md:flex" id="menu">
-        <a href="#Balance" id="btn-balance" class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4">
+        <a href="#Balance" id="href-balance"
+          class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4">
           <i class="fa-solid fa-arrow-trend-up p-1"></i>Balance</a>
-        <a href="#Categorías" id="btn-categorias" class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4">
+        <a href="#Categorías" id="href-categorias"
+          class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4">
           <i class="fa-solid fa-tag p-1"></i>Categorías</a>
-        <a href="#Reportes" id="btn-reportes" class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4 ">
+        <a href="#Reportes" id="href-reportes"
+          class="flex items-center gap-2 hover:bg-pink-600 rounded 2xl:w-full py-1 px-3 sm:py-2 sm:px-4 ">
           <i class="fas fa-chart-pie p-1"></i> Reportes</a>
       </div>
     </nav>
@@ -43,40 +46,41 @@
         <!-- Contenedor de las tarjetas Balance y Filtros en columna -->
         <div class="flex flex-col gap-4 flex-1 max-w-xs w-full md:w-1/2 lg:w-1/3 ">
           <!-- CARD BALANCE -->
-          <div id="seccion-balance" class="rounded-lg bg-white shadow-lg p-4 sm:p-6 lg:p-8">
+          <div id="card-balance" class="rounded-lg bg-white shadow-lg p-4 sm:p-6 lg:p-8">
             <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold">Balance</h3>
             <div class="flex justify-between p-2">
               <p>Ganancias</p>
-              <div id="ganancias" class="text-green-500">+$0</div>
+              <div id="total-ganancias" class="text-green-500">+$0</div>
             </div>
             <div class="flex justify-between p-2">
               <p>Gastos</p>
-              <div id="gastos" class="text-red-500">-$0</div>
+              <div id="total-gastos" class="text-red-500">-$0</div>
             </div>
             <div class="flex justify-between p-2 mt-2">
               <p class="text-xl font-semibold">Total</p>
-              <div id="total" class="text-xl">$0</div>
+              <div id="total-balance" class="text-xl">$0</div>
             </div>
           </div>
 
           <!-- CARD FILTROS -->
-          <div  id="card-filtros" class="rounded-lg bg-white shadow-lg p-4 sm:p-6 lg:p-8">
+          <div id="card-filtros" class="rounded-lg bg-white shadow-lg p-4 sm:p-6 lg:p-8">
             <div class="flex items-center justify-between mb-4">
               <h2 class="text-xl font-semibold">Filtros</h2>
-              <button id="btn-toggle-filtros" type="button" class="text-indigo-500 hover:text-indigo-700 focus:outline-none">
+              <button id="toggle-filtros" type="button"
+                class="text-indigo-500 hover:text-indigo-700 focus:outline-none">
                 Ocultar filtros
               </button>
             </div>
 
-            <form id="seccion-filtros">
+            <form id="form-filtros">
               <div id="filtrar-datos">
                 <div class="mb-4">
                   <label for="filtro-tipo" class="block text-sm font-medium text-gray-700">Tipo</label>
                   <select id="filtro-tipo"
                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
                     <option selected value="TODOS">Todos</option>
-                    <option value="GASTO">Gasto</option>
-                    <option value="GANANCIA">Ganancia</option>
+                    <option value="gasto">Gasto</option>
+                    <option value="ganancia">Ganancia</option>
                   </select>
                 </div>
               </div>
@@ -85,163 +89,154 @@
                 <label for="filtro-categoria" class="block text-sm font-medium text-gray-700">Categoría</label>
                 <select id="filtro-categoria"
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                  <option>Todas</option>
-                  <option>Comida</option>
-                  <option>Servicios</option>
-                  <option>Salidas</option>
-                  <option>Comida</option>
-                  <option>Educacion</option>
-                  <option>Transporte</option>
-                  <option>Trabajo</option>
                 </select>
               </div>
               <div class="mb-4">
-                <label for="filtro-fecha" class="block text-sm font-medium text-gray-700">Desde</label>
-                <input type="date" id="filtro-fecha"
+                <label for="filtro-desde" class="block text-sm font-medium text-gray-700">Desde</label>
+                <input type="date" id="filtro-desde"
                   class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
               </div>
-              <div class="mb-4">
-                <label for="filtro-ordenar" class="block text-sm font-medium text-gray-700">Ordenar por</label>
-                <select id="filtro-ordenar"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                  <option value="MAS RECIENTES">Más recientes</option>
-                  <option value="MENOS RECIENTES">Menos recientes</option>
-                  <option value="MAYOR MONTO">Mayor monto</option>
-                  <option value="MENOR MONTO">Menor monto</option>
-                  <option value="A/Z">A/Z</option>
-                  <option value="Z/A">Z/A</option>
-                </select>
-              </div>
+              <div class="mb-4"></div>
+              <label for="filtro-hasta" class="block text-sm font-medium text-gray-700">Hasta</label>
+              <input type="date" id="filtro-hasta"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
+              <label for="ordenar" class="block text-sm font-medium text-gray-700 pt-3">Ordenar por</label>
+              <select id="ordenar"
+                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="MAS RECIENTES">Más recientes</option>
+                <option value="MENOS RECIENTES">Menos recientes</option>
+                <option value="MAYOR MONTO">Mayor monto</option>
+                <option value="MENOR MONTO">Menor monto</option>
+                <option value="A/Z">A/Z</option>
+                <option value="Z/A">Z/A</option>
+              </select>
+
             </form>
           </div>
 
         </div>
 
         <!-- CARD OPERACIONES -->
-        <div id="seccion-operaciones" class="w-full md:w-1/2 lg:w-2/3 rounded-lg bg-white shadow-lg p-4 sm:p-6 lg:p-8">
+        <div id="card-operaciones" class="w-full md:w-1/2 lg:w-2/3 rounded-lg bg-white shadow-lg p-4 sm:p-6 lg:p-8">
           <!-- SIN OPERACIONES -->
           <div class="flex justify-between items-center mb-8">
             <h2 class="text-lg sm:text-xl font-semibold">Operaciones</h2>
-            <button type="button" id="btn-nueva-operacion"
+            <button type="button" id="href-nueva-operacion"
               class="bg-purple-500 text-white py-1 px-3 sm:py-2 sm:px-4 rounded hover:bg-pink-600 focus:outline-none text-xs sm:text-sm">
               + Nueva operación
             </button>
           </div>
-          <div class="flex flex-col items-center justify-center h-75" id="imagen-saving">
-            <img src="./assets/img/saving.png" alt="imagen saving" class="mb-4 w-1/2" />
+          <div class="flex flex-col items-center justify-center h-75" id="sin-operaciones">
+            <img src="./assets/img/saving.png" alt="No hay operaciones" class="mb-4 w-1/2" />
             <p class="text-gray-500">Sin resultados</p>
             <p class="text-sm text-gray-400">Cambia los filtros o agrega operaciones</p>
           </div>
           <!-- CON OPERACIONES -->
-            <section class="m-4" id="conOperaciones">
-              <div class="flex flex-row gap-9">
-                <!-- Descripción -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Descripción </h4>
-                  <div>
-                    <span"></span>
-                  </div>
-                </div>
-                <!-- Categoría -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Categoría</h4>
-                  <div>
-                    <span></span>
-                  </div>
-                </div>
-                <!-- Fecha-->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Fecha</h4>
-                  <div>
-                    <span></span>
-                  </div>
-                </div>
-                <!-- Monto -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Monto</h4>
-                  <div>
-                    <span></span>
-                  </div>
-                </div>
-                <!-- Acciones -->
-                <div class="flex flex-col">
-                  <h4 class="font-bold text-gray-700">Acciones</h4>
-                  <div>
-                    <button id="editar">editar</button>
-                    <button id="borrarOperaciones">borrar</button>
-                  </div>
+          <section class="m-4" id="con-operaciones">
+            <div id="lista-operaciones" class="flex flex-col">
+              <!-- Descripción -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Descripción </h4>
+                <div>
+                  <span"></span>
                 </div>
               </div>
-            </section>
+              <!-- Categoría -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Categoría</h4>
+                <div>
+                  <span></span>
+                </div>
+              </div>
+              <!-- Fecha-->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Fecha</h4>
+                <div>
+                  <span></span>
+                </div>
+              </div>
+              <!-- Monto -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Monto</h4>
+                <div>
+                  <span></span>
+                </div>
+              </div>
+              <!-- Acciones -->
+              <div class="flex flex-col">
+                <h4 class="font-bold text-gray-700">Acciones</h4>
+                <div>
+                  <button id="editar">editar</button>
+                  <button id="borrar-operaciones">borrar</button>
+                </div>
+              </div>
+            </div>
+          </section>
 
-          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--nuevo div, CARD DE OPERACIONES -->
+    <div>
+      <!-- Sección Nueva Operación -->
+      <div class="flex items-center justify-center mt-4">
+        <div id="seccion-nueva-op"
+          class="w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-white rounded-lg shadow-lg hidden">
+          <h2 class="text-xl font-semibold mb-4">Nueva Operación</h2>
+          <form>
+            <div class="mb-6">
+              <label for="descripcion-nueva-op" class="block text-sm font-medium text-gray-700">Descripción</label>
+              <input type="text" id="descripcion-nueva-op" name="descripcion-nueva-op"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required>
+            </div>
+            <div class="mb-6">
+              <label for="monto-nueva-op" class="block text-sm font-medium text-gray-700">Monto</label>
+              <input type="number" id="monto-nueva-op" name="monto-nueva-op"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required>
+            </div>
+            <div class="mb-6">
+              <label for="tipo-nueva-op" class="block text-sm font-medium text-gray-700">Tipo</label>
+              <select id="tipo-nueva-op" name="tipo-nueva-op"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required>
+                <option value="" disabled selected>Seleccione un tipo</option>
+                <option value="gasto">Gasto</option>
+                <option value="ganancia">Ganancia</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label for="categoria-nueva-op" class="block text-sm font-medium text-gray-700">Categoría</label>
+              <select id="categoria-nueva-op" name="categoria-nueva-op"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required>
+                <option value="" disabled selected>Seleccione un tipo</option>
+              </select>
+            </div>
+            <div class="mb-8">
+              <label for="fecha-nueva-op" class="block text-sm font-medium text-gray-700">Fecha</label>
+              <input type="date" id="fecha-nueva-op" name="fecha-nueva-op"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                required>
+            </div>
+            <button type="button" id="agregar-nueva-op"
+              class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">Agregar
+              Operación</button>
+            <button type="button" id="cancelar-nueva-op"
+              class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 focus:outline-none">Cancelar</button>
+          </form>
         </div>
       </div>
 
-      <!--nuevo div, CARD DE OPERACIONES -->
-      <div>
-        <!-- Sección Nueva Operación -->
-        <div class="flex items-center justify-center mt-4">
-          <div id="seccion-operacion" class="w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-white rounded-lg shadow-lg hidden">
-            <h2 class="text-xl font-semibold mb-4">Nueva Operación</h2>
-            <form>
-              <div class="mb-6">
-                <label for="descripcion-operacion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                <input type="text" id="descripcion-operacion" name="descripcion-operacion"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  required>
-              </div>
-              <div class="mb-6">
-                <label for="monto-operacion" class="block text-sm font-medium text-gray-700">Monto</label>
-                <input type="number" id="monto-operacion" name="monto-operacion"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  required>
-              </div>
-              <div class="mb-6">
-                <label for="tipo-operacion" class="block text-sm font-medium text-gray-700">Tipo</label>
-                <select id="tipo-operacion" name="tipo-operacion"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  required>
-                  <option value="" disabled selected>Seleccione un tipo</option>
-                  <option value="ingreso">Gasto</option>
-                  <option value="gasto">Ganancia</option>
-                </select>
-              </div>
-              <div class="mb-6">
-                <label for="categoria-operacion" class="block text-sm font-medium text-gray-700">Categoría</label>
-                <select id="categoria-operacion" name="categoria-operacion"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  required>
-                  <option value="" disabled selected>Seleccione un tipo</option>
-                  <option value="comida">Comida</option>
-                  <option value="servicios">Servicios</option>
-                  <option value="salidas">Salidas</option>
-                  <option value="educacion">Educación</option>
-                  <option value="transporte">Transporte</option>
-                  <option value="trabajo">Trabajo</option>
-                </select>
-              </div>
-              <div class="mb-8">
-                <label for="fecha-operacion" class="block text-sm font-medium text-gray-700">Fecha</label>
-                <input type="date" id="fecha-operacion" name="fecha-operacion"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  required>
-              </div>
-              <button type="button" id="agregar-operacion"
-                class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">Agregar
-                Operación</button>
-              <button type="button"
-                class="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 focus:outline-none">Cancelar</button>
-            </form>
-          </div>
-        </div>
-
-        <!-- AGREGAR REPORTES -->
-        <div class="flex flex-col  vista hidden mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg mt-4 p-4 sm:p-6 lg:p-8"
-          id="seccion-reportes">
+      <!--SECCION REPORTES-->
+      <section>
+        <!-- SIN OPERACIONES -->
+        <div id="seccion-reportes"
+          class="flex flex-col vista hidden mx-auto mt-16 rounded-lg bg-white w-2/4 shadow-lg mt-4 p-4 sm:p-6 lg:p-8">
           <h3 class="text-4xl font-bold mb-4">Reportes</h3>
-          <!-- Comienzo reportes sin operaciones -->
-          <section class="flex flex-col items-center">
+          <section id="reportes-sin-operaciones" class="flex flex-col items-center">
             <img src="./assets/img/reportes.svg" alt="Imagen que muestra gráficos y reportes"
               class="object-cover w-96 p-5">
             <div class="flex flex-col items-center mt-4">
@@ -249,194 +244,154 @@
               <p class="p-1">Prueba agregando más operaciones</p>
             </div>
           </section>
-          <!-- Comienzo reportes con operaciones -->
-          <section class="m-4" id="reporteResumen">
+
+          <!-- CON OPERACIONES -->
+          <section class="m-4" id="reporte-resumen">
             <!-- resumen -->
-            <div class="mb-4" id="resumenOperaciones">
-              <p class="text-2xl font-bold mb-4">Resumen</p>
+            <div class="mb-4" id="resumen-operaciones">
+              <h3 class="text-2xl font-bold mb-4">Resumen</h3>
               <!-- Mayor ganancia -->
-              <div class="columns">
+              <div class="flex-row justify-between">
                 <h4 class="font-bold text-gray-700">Categoría con mayor ganancia</h4>
                 <div class="">
-                  <span id="resumenMayorGanancia"></span>
+                  <span id="categoria-mayor-ganancia-nombre"></span>
                 </div>
                 <div>
-                  <span id="resumenMontoMayor"></span>
+                  <span id="categoria-mayor-ganancia-monto"></span>
                 </div>
               </div>
               <!-- Mayor gasto -->
-              <div class="columns">
+              <div class="flex-row justify-between">
                 <h4 class="font-bold text-gray-700">Categoría con mayor gasto</h4>
                 <div class="">
-                  <span id="resumenMayorGasto"></span>
+                  <span id="categoria-mayor-gasto-nombre"></span>
                 </div>
                 <div>
-                  <span id="resumenMontoMayor"></span>
+                  <span id="categoria-mayor-gasto-monto"></span>
                 </div>
               </div>
               <!-- Mayor balance -->
-              <div class="columns">
+              <div class="flex-row justify-between">
                 <h4 class="font-bold text-gray-700">Categoría con mayor balance</h4>
                 <div class="">
-                  <span id="resumenMayorBalance"></span>
+                  <span id="categoria-mayor-balance-nombre"></span>
                 </div>
                 <div>
-                  <span id="resumenMontoMayorBalance"></span>
+                  <span id="categoria-mayor-balance-monto"></span>
                 </div>
               </div>
               <!-- Mes mayor ganancia -->
-              <div class="columns">
+              <div class="flex-row justify-between">
                 <h4 class="font-bold text-gray-700">Mes con mayor ganancia</h4>
                 <div class="">
-                  <span id="resumenMayorGanancia"></span>
+                  <span id="mes-mayor-ganancia-fecha"></span>
                 </div>
                 <div>
-                  <span id="resumenMontoMayorGanancia"></span>
+                  <span id="mes-mayor-ganancia-monto"></span>
                 </div>
               </div>
               <!-- Mes mayor gasto -->
-              <div class="columns">
+              <div class="flex-row justify-between">
                 <h4 class="font-bold text-gray-700">Mes con mayor gasto</h4>
                 <div class="">
-                  <span id="resumenMayorGastoMes"></span>
+                  <span id="mes-mayor-gasto-fecha"></span>
                 </div>
                 <div>
-                  <span id="resumenMontoGastoMes"></span>
+                  <span id="mes-mayor-gasto-monto"></span>
                 </div>
               </div>
             </div>
           </section>
           <!-- comienzo card Categorías -->
-          <section class="m-4" id="reporteCategorías">
+          <section class="m-4" id="reporte-categorias">
             <!-- Total categorías -->
-            <div class="mb-4" id="conCategorías">
-              <p class="text-2xl font-bold mb-4">Categorías</p>
-            </div>
+            <h3 class="text-2xl font-bold mb-4">Categorías</h3>
             <div class="flex flex-row gap-9">
               <!-- total categorias -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Categorías </h4>
                 <div>
-                  <span id="totalCategorías"></span>
+                  <span id="total-por-categorías-nombres"></span>
                 </div>
               </div>
               <!-- total ganancia -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Ganancias</h4>
                 <div>
-                  <span id="totalGanancias"></span>
+                  <span id="total-por-categorías-ganancias"></span>
                 </div>
               </div>
               <!-- total gasto -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Gastos</h4>
                 <div>
-                  <span id="totalGasto"></span>
+                  <span id="total-por-categorías-gastos"></span>
                 </div>
               </div>
               <!-- total balance -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Balance</h4>
                 <div class="">
-                  <span id="totalBalance"></span>
+                  <span id="total-por-categorías-balance"></span>
                 </div>
               </div>
             </div>
           </section>
           <!-- Comienzo card Mes-->
-          <section class="m-4" id="reporteMes">
+          <section class="m-4" id="reporte-mes">
             <!-- Totales por mes -->
-            <div class="mt-4" id="conMes">
-              <p class="text-2xl font-bold mb-4">Totales por mes</p>
-            </div>
+            <h3 class="font-bold text-gray-700">Totales por mes</h3>
             <div class="flex flex-row gap-9">
               <!-- Mes categorias -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Mes </h4>
                 <div>
-                  <span id="reporteMes"></span>
+                  <span id="reporte-mes"></span>
                 </div>
               </div>
               <!-- Mes ganancia -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Ganancias</h4>
                 <div>
-                  <span id="totalMesGanancias"></span>
+                  <span id="total-mes-ganancias"></span>
                 </div>
               </div>
               <!-- Mes gasto -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Gastos</h4>
                 <div>
-                  <span id="totalMesGasto"></span>
+                  <span id="total-mes-gasto"></span>
                 </div>
               </div>
               <!-- Mes balance -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Balance</h4>
                 <div>
-                  <span id="totalMesBalance"></span>
+                  <span id="total-mes-balance"></span>
                 </div>
               </div>
             </div>
           </section>
         </div>
-        <!-- CARD CATEGORIAS -->
-        <div id="seccion-categorias" class="flex justify-center items-center hidden">
-          <div class="bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 w-full sm:w-3/4 lg:w-1/2">
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">Categorías</h2>
-            <div class="flex items-center mb-4">
-              <input id="categoria-nombre" type="text" placeholder="Nombre" class="w-full border rounded-lg px-4 py-2 mr-4">
-              <button
-                class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none"id="agregar-categoria">Agregar</button>
-            </div>
-            <ul id="lista-categorias">
-              <li class="flex justify-between items-center mb-2">
-                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Comida</span>
-                <div>
-                  <a href="#" class="text-blue-500 mr-4"id="seccion-editar-categorias">Editar</a>
-                  <a href="#" class="text-red-500">Eliminar</a>
-                </div>
-              </li>
-              <li class="flex justify-between items-center mb-2">
-                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Servicios</span>
-                <div>
-                  <a href="#" class="text-blue-500 mr-4">Editar</a>
-                  <a href="#" class="text-red-500">Eliminar</a>
-                </div>
-              </li>
-              <li class="flex justify-between items-center mb-2">
-                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Salidas</span>
-                <div>
-                  <a href="#" class="text-blue-500 mr-4">Editar</a>
-                  <a href="#" class="text-red-500">Eliminar</a>
-                </div>
-              </li>
-              <li class="flex justify-between items-center mb-2">
-                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Educación</span>
-                <div>
-                  <a href="#" class="text-blue-500 mr-4">Editar</a>
-                  <a href="#" class="text-red-500">Eliminar</a>
-                </div>
-              </li>
-              <li class="flex justify-between items-center mb-2">
-                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Transporte</span>
-                <div>
-                  <a href="#" class="text-blue-500 mr-4">Editar</a>
-                  <a href="#" class="text-red-500">Eliminar</a>
-                </div>
-              </li>
-              <li class="flex justify-between items-center mb-2">
-                <span class="bg-teal-200 text-gray-500 px-4 py-1 rounded-lg">Trabajo</span>
-                <div>
-                  <a href="#" class="text-blue-500 mr-4">Editar</a>
-                  <a href="#" class="text-red-500">Eliminar</a>
-                </div>
-              </li>
-            </ul>
+      </section>
+
+      <!-- CARD CATEGORIAS -->
+      <div id="seccion-categorias" class="flex justify-center items-center hidden">
+        <div class="bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 w-full sm:w-3/4 lg:w-1/2">
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">Categorías</h2>
+          <div class="flex items-center mb-4">
+            <input id="nueva-categoria-nombre" type="text" placeholder="Nombre"
+              class="w-full border rounded-lg px-4 py-2 mr-4">
+            <button id="agregar-categoria"
+              class="bg-purple-500 text-white py-2 px-4 rounded hover:bg-pink-600 focus:outline-none">
+              Agregar
+            </button>
           </div>
+          <ul id="lista-categorias">
+          </ul>
         </div>
-         <!-- FIN CATEGORIAS -->
+      </div>
+      <!-- FIN CATEGORIAS -->
   </main>
   <!-- JS -->
   <script src="main.js"></script>
