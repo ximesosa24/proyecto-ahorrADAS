@@ -57,17 +57,27 @@ const categoriaMayorGananciaNombre = document.getElementById('categoria-mayor-ga
 const categoriaMayorGananciaMonto = document.getElementById('categoria-mayor-ganancia-monto');
 const categoriaMayorGastoNombre = document.getElementById('categoria-mayor-gasto-nombre');
 const categoriaMayorGastoMonto = document.getElementById('categoria-mayor-gasto-monto');
-const categoriaMejorBalanceNombre = document.getElementById('categoria-mayor-balance-nombre');
-const categoriaMejorBalanceMonto = document.getElementById('categoria-mayor-balance-monto');
+const categoriaMejorBalanceNombre = document.getElementById('categoria-mejor-balance-nombre');
+const categoriaMejorBalanceMonto = document.getElementById('categoria-mejor-balance-monto');
 const mesMayorGananciaFecha = document.getElementById('mes-mayor-ganancia-fecha');
 const mesMayorGananciaMonto = document.getElementById('mes-mayor-ganancia-monto');
 const mesMayorGastoFecha = document.getElementById('mes-mayor-gasto-fecha');
 const mesMayorGastoMonto = document.getElementById('mes-mayor-gasto-monto');
+const columnaTotalCategoriasNombre = document.getElementById('total-categorias-nombres');
+const columnaTotalCategoriasGanancia = document.getElementById('total-categorias-ganancias');
+const columnaTotalCategoriasGasto = document.getElementById('total-categorias-gastos');
+const columnaTotalCategoriasBalance = document.getElementById('total-categorias-balances');
+const columnaTotalMesPeriodo = document.getElementById('total-mes-periodo');
+const columnaTotalMesGanancias = document.getElementById('total-mes-ganancias');
+const columnaTotalMesGastos = document.getElementById('total-mes-gastos');
+const columnaTotalMesBalance = document.getElementById('total-mes-balance');
 
 //Variables
 let ocultarFiltros = false;
 let editandoCategoria = null;
 let editandoOperacion = null;
+let totalesPorCategoria = [];
+let totalesPorMes = [];
 renderizarOperaciones();
 renderizarBalance();
 categoriasPorDefecto();
@@ -356,86 +366,176 @@ function renderizarReportes() {
   reporteCategorias.classList.remove('hidden');
   resumenReportes.classList.remove('hidden');
 
-  const categoriaMasGanancia = operaciones
-    //Filtro operaciones por ganancia
-    .filter(op=>op.tipo == 'ganancia')
-    //Convierto las operaciones en una tabla de categoria y ganancia acumulada
-    .reduce((ganXCat,op)=>{
-      //Si no tengo la categoria en la tabla la añado con el monto de la operacion
-      if(!ganXCat.map(elm=>elm.categoria).includes(op.categoria)) {
-        ganXCat.push({categoria:op.categoria,monto:op.monto});
-      //Si ya tengo la categoria en la tabla le sumo el monto de esta operacion
-      } else {
-        const index = ganXCat.findIndex(elm=>elm.categoria == op.categoria);
-        ganXCat[index].monto += op.monto;
-      }
-      return ganXCat;
-    },[])
-    //Luego comparo los elementos de esta tabla para sacar la de mayor monto
-    .reduce((masGan, cat) => {
-      if (masGan.monto < cat.monto) masGan = cat;
-      return masGan;
-    }, {categoria: '', monto: 0});
+  totalesPorCategoria = [];
+  totalesPorMes = [];
 
+  //Creo listado de {categoria, ganancia, gasto, balance} y lo completo con las operaciones
+  totalesPorCategoria = operaciones.reduce((listadoBalances,op)=>{
 
-  const categoriaMasGasto = operaciones.filter(op=>op.tipo == 'gasto')
-    .reduce((gastXCat,op)=>{
-      if(!gastXCat.map(elm=>elm.categoria).includes(op.categoria)) {
-        gastXCat.push({categoria:op.categoria,monto:op.monto});
-      } else {
-        const index = gastXCat.findIndex(elm=>elm.categoria == op.categoria);
-        gastXCat[index].monto += op.monto;
-      }
-      return gastXCat;
-    },[])
-    .reduce((masGast, cat) => {
-      if (masGast.monto < cat.monto) masGast = cat;
-      return masGast;
-    }, {categoria: '', monto: 0});
-    
-
-  //Mismo comportamiento que categoriaMasGanancia pero validando el tipo y sumando o restando segun corresponde
-  const categoriaMejorBalance = operaciones.reduce((balXCat,op)=>{
-    if(!balXCat.map(elm=>elm.categoria).includes(op.categoria)) {
+    //Si no tengo la categoria en el listado, añado el elemento con esta operacion como valor inicial
+    if(!listadoBalances.map(elm=>elm.categoria).includes(op.categoria)) {
       if(op.tipo=='ganancia'){
-        balXCat.push({categoria:op.categoria,monto:op.monto});
+        listadoBalances.push({categoria:op.categoria,ganancia:op.monto,gasto:0,balance:op.monto});
       } else {
-        balXCat.push({categoria:op.categoria,monto:-op.monto});
+        //Tipo gasto
+        listadoBalances.push({categoria:op.categoria,ganancia:0,gasto:op.monto,balance:-op.monto});
       }
+
+    //Si tengo la categoria en el listado, sumo su monto a los totales según corresponde
     } else {
-      const index = balXCat.findIndex(elm=>elm.categoria == op.categoria);
+      const index = listadoBalances.findIndex(elm=>elm.categoria == op.categoria);
       if(op.tipo=='ganancia'){
-        balXCat[index].monto += op.monto;
+        listadoBalances[index].ganancia += op.monto;
+        listadoBalances[index].balance += op.monto;
       } else {
-        balXCat[index].monto -= op.monto;
+        //Tipo gasto
+        listadoBalances[index].gasto += op.monto;
+        listadoBalances[index].balance -= op.monto;
       }
     }
-    return balXCat;
-  },[])
-  .reduce((mejBal, cat) => {
-    if (mejBal.monto < cat.monto) mejBal = cat;
-    return mejBal;
-  }, {categoria: '', monto: 0});
+    return listadoBalances;
+  },[]);
+
+  //Creo listado de {periodo (mm/yyyy), ganancia, gasto, balance} y lo completo con las operaciones
+  totalesPorMes = operaciones.reduce((listadoBalances,op)=>{
+
+    /*
+      Para obtener una fecha mm/yyyy convierto la fecha en ISOString (2023-05-30T00:00:00.000Z)
+      convierto en un arreglo usando el guión como separador y luego traigo los elementos que me interesan
+    */
+    const periodo =
+      new Date(op.fecha).toISOString().split('-')[1] +
+      '/' +
+      new Date(op.fecha).toISOString().split('-')[0];
+
+    //Si no tengo el mes en el listado, añado el elemento con esta operacion como valor inicial
+    if(!listadoBalances.map(elm=>elm.periodo).includes(periodo)) {
+      if(op.tipo=='ganancia'){
+        listadoBalances.push({periodo:periodo,ganancia:op.monto,gasto:0,balance:op.monto});
+      } else {
+        //Tipo gasto
+        listadoBalances.push({periodo:periodo,ganancia:0,gasto:op.monto,balance:-op.monto});
+      }
+
+    //Si tengo el mes en el listado, sumo su monto a los totales según corresponde
+    } else {
+      const index = listadoBalances.findIndex(elm=>elm.periodo == periodo);
+      if(op.tipo=='ganancia'){
+        listadoBalances[index].ganancia += op.monto;
+        listadoBalances[index].balance += op.monto;
+      } else {
+        //Tipo gasto
+        listadoBalances[index].gasto += op.monto;
+        listadoBalances[index].balance -= op.monto;
+      }
+    }
+    return listadoBalances;
+  },[]);
+
+  //Busco la categoria con mas ganancia iterando con un reduce
+  const categoriaMasGanancia = totalesPorCategoria.reduce((masGanancia,categoria)=>{
+    //Si la categoria actual tiene mayor ganancia que la del acumulador, devuelvo la categoria actual
+    if(categoria.ganancia >= masGanancia.ganancia){
+      return categoria;
+    }
+    return masGanancia;
+  },{categoria:'',ganancia:0,gasto:0,balance:0});
+
+  const categoriaMasGasto = totalesPorCategoria.reduce((masGasto,categoria)=>{
+    if(categoria.gasto >= masGasto.gasto){
+      return categoria;
+    }
+    return masGasto;
+  },{categoria:'',ganancia:0,gasto:0,balance:0});
+
+  const categoriaMejorBalance = totalesPorCategoria.reduce((mejorBalance,categoria)=>{
+    if(categoria.balance >= mejorBalance.balance){
+      return categoria;
+    }
+    return mejorBalance;
+  },{categoria:'',ganancia:0,gasto:0,balance:0});
+
+  const mesMasGanancia = totalesPorMes.reduce((masGanancia,mes)=>{
+    //Si la categoria actual tiene mayor ganancia que la del acumulador, devuelvo la categoria actual
+    if(mes.ganancia >= masGanancia.ganancia){
+      return mes;
+    }
+    return masGanancia;
+  },{periodo:'',ganancia:0,gasto:0,balance:0});
+
+  const mesMasGasto = totalesPorMes.reduce((masGasto,mes)=>{
+    if(mes.gasto >= masGasto.gasto){
+      return mes;
+    }
+    return masGasto;
+  },{periodo:'',ganancia:0,gasto:0,balance:0});
 
   categoriaMayorGananciaNombre.textContent = categoriaMasGanancia.categoria;
-  categoriaMayorGananciaMonto.textContent = categoriaMasGanancia.monto;
+  categoriaMayorGananciaMonto.textContent = categoriaMasGanancia.ganancia;
   categoriaMayorGastoNombre.textContent = categoriaMasGasto.categoria;
-  categoriaMayorGastoMonto.textContent = categoriaMasGasto.monto;
+  categoriaMayorGastoMonto.textContent = categoriaMasGasto.gasto;
   categoriaMejorBalanceNombre.textContent = categoriaMejorBalance.categoria;
-  categoriaMejorBalanceMonto.textContent = categoriaMejorBalance.monto;
+  categoriaMejorBalanceMonto.textContent = categoriaMejorBalance.balance;
+  mesMayorGananciaFecha.textContent = mesMasGanancia.periodo;
+  mesMayorGananciaMonto.textContent = mesMasGanancia.ganancia;
+  mesMayorGastoFecha.textContent = mesMasGasto.periodo;
+  mesMayorGastoMonto.textContent = mesMasGasto.gasto;
+
+  columnaTotalCategoriasNombre.innerHTML = '';
+  columnaTotalCategoriasGanancia.innerHTML = '';
+  columnaTotalCategoriasGasto.innerHTML = '';
+  columnaTotalCategoriasBalance.innerHTML = '';
+  columnaTotalMesPeriodo.innerHTML = '';
+  columnaTotalMesGanancias.innerHTML = '';
+  columnaTotalMesGastos.innerHTML = '';
+  columnaTotalMesBalance.innerHTML = '';
+
+  //Renderizando totales por categoría
+  totalesPorCategoria.forEach(categoria=>{
+
+    let spanCategoria = document.createElement('span');
+    spanCategoria.textContent = categoria.categoria
+    columnaTotalCategoriasNombre.appendChild(spanCategoria);
+    
+    let spanGanancia = document.createElement('span');
+    spanGanancia.textContent = categoria.ganancia
+    columnaTotalCategoriasGanancia.appendChild(spanGanancia);
+
+    let spanGasto = document.createElement('span');
+    spanGasto.textContent = categoria.gasto
+    columnaTotalCategoriasGasto.appendChild(spanGasto);
+
+    let spanBalance = document.createElement('span');
+    spanBalance.textContent = categoria.balance
+    columnaTotalCategoriasBalance.appendChild(spanBalance);
+  });
+
+  //Renderizado totales por mes
+  totalesPorMes.forEach(periodo=>{
+
+    let spanPeriodo = document.createElement('span');
+    spanPeriodo.textContent = periodo.periodo
+    columnaTotalMesPeriodo.appendChild(spanPeriodo);
+    
+    let spanGanancia = document.createElement('span');
+    spanGanancia.textContent = periodo.ganancia
+    columnaTotalMesGanancias.appendChild(spanGanancia);
+
+    let spanGasto = document.createElement('span');
+    spanGasto.textContent = periodo.gasto
+    columnaTotalMesGastos.appendChild(spanGasto);
+
+    let spanBalance = document.createElement('span');
+    spanBalance.textContent = periodo.balance
+    columnaTotalMesBalance.appendChild(spanBalance);
+  });
 
 }
 
 //Editar categoria
-function mostrarFormularioEdicion(categoria) {
+function editarCategoria(categoria) {
   inputNuevaCategoria.value = categoria.nombre;
   editandoCategoria = categoria;
-}
-
-//Dejar de editar categoria
-function ocultarFormularioEdicion() {
-  inputNuevaCategoria.value = '';
-  categoriaEditando = null;
 }
 
 function renderizarBalance() {
@@ -598,7 +698,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const nombreCategoria = e.target.id.replace('editar-categoria-', '');
       const categoria = categorias.find(c => c.nombre === nombreCategoria);
       if (categoria) {
-        mostrarFormularioEdicion(categoria);
+        editarCategoria(categoria);
       }
     } else if (e.target.id.startsWith('eliminar-categoria-')) {
       const nombreCategoria = e.target.id.replace('eliminar-categoria-', '');
