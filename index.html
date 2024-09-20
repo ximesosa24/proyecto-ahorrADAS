@@ -251,54 +251,34 @@
             <div class="mb-4" id="resumen-operaciones">
               <h3 class="text-2xl font-bold mb-4">Resumen</h3>
               <!-- Mayor ganancia -->
-              <div class="flex-row justify-between">
-                <h4 class="font-bold text-gray-700">Categoría con mayor ganancia</h4>
-                <div class="">
-                  <span id="categoria-mayor-ganancia-nombre"></span>
-                </div>
-                <div>
-                  <span id="categoria-mayor-ganancia-monto"></span>
-                </div>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-gray-700">Categoría con mayor ganancia</span>
+                <span id="categoria-mayor-ganancia-nombre"></span>
+                <span id="categoria-mayor-ganancia-monto"></span>
               </div>
               <!-- Mayor gasto -->
-              <div class="flex-row justify-between">
-                <h4 class="font-bold text-gray-700">Categoría con mayor gasto</h4>
-                <div class="">
-                  <span id="categoria-mayor-gasto-nombre"></span>
-                </div>
-                <div>
-                  <span id="categoria-mayor-gasto-monto"></span>
-                </div>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-gray-700">Categoría con mayor gasto</span>
+                <span id="categoria-mayor-gasto-nombre"></span>
+                <span id="categoria-mayor-gasto-monto"></span>
               </div>
               <!-- Mayor balance -->
-              <div class="flex-row justify-between">
-                <h4 class="font-bold text-gray-700">Categoría con mayor balance</h4>
-                <div class="">
-                  <span id="categoria-mayor-balance-nombre"></span>
-                </div>
-                <div>
-                  <span id="categoria-mayor-balance-monto"></span>
-                </div>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-gray-700">Categoría con mejor balance</span>
+                <span id="categoria-mejor-balance-nombre"></span>
+                <span id="categoria-mejor-balance-monto"></span>
               </div>
               <!-- Mes mayor ganancia -->
-              <div class="flex-row justify-between">
-                <h4 class="font-bold text-gray-700">Mes con mayor ganancia</h4>
-                <div class="">
-                  <span id="mes-mayor-ganancia-fecha"></span>
-                </div>
-                <div>
-                  <span id="mes-mayor-ganancia-monto"></span>
-                </div>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-gray-700">Mes con mayor ganancia</span>
+                <span id="mes-mayor-ganancia-fecha"></span>
+                <span id="mes-mayor-ganancia-monto"></span>
               </div>
               <!-- Mes mayor gasto -->
-              <div class="flex-row justify-between">
-                <h4 class="font-bold text-gray-700">Mes con mayor gasto</h4>
-                <div class="">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-gray-700">Mes con mayor gasto</span>
                   <span id="mes-mayor-gasto-fecha"></span>
-                </div>
-                <div>
                   <span id="mes-mayor-gasto-monto"></span>
-                </div>
               </div>
             </div>
           </section>
@@ -306,33 +286,29 @@
           <section class="m-4" id="reporte-categorias">
             <!-- Total categorías -->
             <h3 class="text-2xl font-bold mb-4">Categorías</h3>
-            <div class="flex flex-row gap-9">
+            <div  class="flex flex-row justify-between gap-9">
               <!-- total categorias -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Categorías </h4>
-                <div>
-                  <span id="total-por-categorías-nombres"></span>
+                <div id="total-categorias-nombres" class="flex flex-col">
                 </div>
               </div>
               <!-- total ganancia -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Ganancias</h4>
-                <div>
-                  <span id="total-por-categorías-ganancias"></span>
+                <div id="total-categorias-ganancias" class="flex flex-col">
                 </div>
               </div>
               <!-- total gasto -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Gastos</h4>
-                <div>
-                  <span id="total-por-categorías-gastos"></span>
+                <div id="total-categorias-gastos" class="flex flex-col">
                 </div>
               </div>
               <!-- total balance -->
               <div class="flex flex-col">
                 <h4 class="font-bold text-gray-700">Balance</h4>
-                <div class="">
-                  <span id="total-por-categorías-balance"></span>
+                <div id="total-categorias-balances" class="flex flex-col">
                 </div>
               </div>
             </div>
@@ -344,31 +320,23 @@
             <div class="flex flex-row gap-9">
               <!-- Mes categorias -->
               <div class="flex flex-col">
-                <h4 class="font-bold text-gray-700">Mes </h4>
-                <div>
-                  <span id="reporte-mes"></span>
-                </div>
+                <span class="font-bold text-gray-700">Mes </span>
+                <div id="total-mes-periodo" class="flex flex-col"></div>
               </div>
               <!-- Mes ganancia -->
               <div class="flex flex-col">
-                <h4 class="font-bold text-gray-700">Ganancias</h4>
-                <div>
-                  <span id="total-mes-ganancias"></span>
-                </div>
+                <span class="font-bold text-gray-700">Ganancias</span>
+                <div id="total-mes-ganancias" class="flex flex-col"></div>
               </div>
               <!-- Mes gasto -->
               <div class="flex flex-col">
-                <h4 class="font-bold text-gray-700">Gastos</h4>
-                <div>
-                  <span id="total-mes-gasto"></span>
-                </div>
+                <span class="font-bold text-gray-700">Gastos</span>
+                <div id="total-mes-gastos" class="flex flex-col"></div>
               </div>
               <!-- Mes balance -->
               <div class="flex flex-col">
-                <h4 class="font-bold text-gray-700">Balance</h4>
-                <div>
-                  <span id="total-mes-balance"></span>
-                </div>
+                <span class="font-bold text-gray-700">Balance</span>
+                <div id="total-mes-balance" class="flex flex-col"></div>
               </div>
             </div>
           </section>
