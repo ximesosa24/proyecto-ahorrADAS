@@ -229,7 +229,7 @@ function renderizarOperaciones(operaciones) {
   listaOperaciones.classList.remove('hidden');
   operaciones.forEach((operacion, index) => {
     const operacionHTML = `
-      <div class="flex flex-row justify-evenly">
+      <div class="flex flex-col sm:flex sm:flex-row justify-evenly">
         <div class="flex flex-col">
             <h4 class="font-bold text-gray-700">ID</h4>
             <div>
